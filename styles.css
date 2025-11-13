@@ -228,9 +228,9 @@ body {
   color: var(--sf-pink);
 }
 
-.badge-reprise {
-  background: rgba(245, 158, 11, 0.12);
-  color: #b45309;
+.badge-adapte {
+  background: rgba(59, 130, 246, 0.12);
+  color: #1d4ed8;
 }
 
 /* RIGHT PANEL */
@@ -251,37 +251,78 @@ body {
   color: var(--text-muted);
 }
 
-.player-header {
+/* Player header card style FIFA */
+
+.player-header-card {
+  border-radius: 20px;
+  background: radial-gradient(circle at top left, rgba(255, 46, 154, 0.25), transparent 60%),
+              radial-gradient(circle at bottom right, rgba(0, 33, 71, 0.4), transparent 60%),
+              #020617;
+  color: #fff;
+  padding: 14px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.ph-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 18px;
+  background: rgba(15, 23, 42, 0.6);
   display: flex;
-  gap: 14px;
   align-items: center;
-  margin-bottom: 12px;
-}
-
-.player-header-info h2 {
-  margin: 0;
+  justify-content: center;
   font-size: 1.2rem;
+  font-weight: 700;
 }
 
-.player-header-info p {
-  margin: 2px 0;
-  font-size: 0.85rem;
-  color: var(--text-muted);
+.ph-main {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
-.player-tags {
+.ph-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.ph-sub {
+  font-size: 0.8rem;
+  opacity: 0.85;
+}
+
+.ph-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-top: 6px;
 }
 
-.tag {
-  font-size: 0.75rem;
+.ph-tag {
+  font-size: 0.7rem;
   padding: 2px 8px;
   border-radius: 999px;
-  background: #f3f4f6;
-  color: #374151;
+  background: rgba(15, 23, 42, 0.6);
+}
+
+.ph-score {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 4px;
+}
+
+.ph-score-value {
+  font-size: 1.7rem;
+  font-weight: 800;
+}
+
+.ph-score-label {
+  font-size: 0.7rem;
+  opacity: 0.8;
 }
 
 /* Sections */
@@ -334,6 +375,29 @@ body {
   font-weight: 600;
 }
 
+/* Segment tabs */
+
+.segment-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.segment-tab {
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border-soft);
+  background: #f9fafb;
+  cursor: pointer;
+}
+
+.segment-tab.active {
+  background: linear-gradient(135deg, var(--sf-pink), var(--sf-blue));
+  color: #fff;
+  border-color: transparent;
+}
+
 /* Tableaux */
 
 .table-like {
@@ -352,6 +416,14 @@ body {
 .table-like th {
   font-weight: 600;
   color: var(--text-muted);
+}
+
+.table-clickable tbody tr {
+  cursor: pointer;
+}
+
+.table-clickable tbody tr:hover {
+  background: #f9fafb;
 }
 
 .flag-dot {
@@ -428,6 +500,39 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
   gap: 8px;
+}
+
+/* Test detail */
+
+.test-detail-wrapper {
+  margin-top: 10px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-soft);
+  background: #fff;
+  padding: 8px;
+}
+
+.test-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.test-detail-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.test-detail-sub {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.test-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 6px;
 }
 
 /* Responsive */
