@@ -185,10 +185,10 @@ align-items: center;
 justify-content: center;
 font-weight: 600;
 overflow: hidden;
+flex-shrink: 0;
 }
 
 .player-avatar img {
-display: block;
 width: 100%;
 height: 100%;
 object-fit: cover;
@@ -288,7 +288,6 @@ overflow: hidden;
 }
 
 .ph-avatar img {
-display: block;
 width: 100%;
 height: 100%;
 object-fit: cover;
@@ -461,7 +460,7 @@ background: #ea580c;
 background: #dc2626;
 }
 
-/* Protocole */
+/* Protocole & progression */
 
 .protocole-week {
 border-radius: var(--radius-md);
@@ -480,8 +479,6 @@ margin-bottom: 4px;
 .protocole-week-content {
 font-size: 0.8rem;
 }
-
-/* BADGES phase */
 
 .phase-pill {
 font-size: 0.75rem;
@@ -510,6 +507,49 @@ background: rgba(22, 163, 74, 0.1);
 color: #15803d;
 }
 
+/* Progression blessure */
+
+.progress-container {
+margin-top: 10px;
+}
+
+.progress-bar {
+width: 100%;
+height: 14px;
+border-radius: 999px;
+background: #e5e7eb;
+overflow: hidden;
+position: relative;
+}
+
+.progress-fill {
+height: 100%;
+border-radius: 999px;
+background: linear-gradient(90deg, #ef4444, var(--sf-pink), #22c55e);
+transition: width 0.25s ease-out;
+}
+
+.progress-marks {
+position: absolute;
+inset: 0;
+display: flex;
+justify-content: space-between;
+padding: 0 4px;
+pointer-events: none;
+}
+
+.progress-mark {
+width: 1px;
+background: rgba(15, 23, 42, 0.3);
+opacity: 0.3;
+}
+
+.progress-text {
+font-size: 0.75rem;
+color: var(--text-muted);
+margin-top: 4px;
+}
+
 /* GPS cards */
 
 .gps-cards {
@@ -518,7 +558,7 @@ grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
 gap: 8px;
 }
 
-/* Test detail */
+/* Test detail & tendances */
 
 .test-detail-wrapper {
 margin-top: 10px;
@@ -551,37 +591,6 @@ grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
 gap: 6px;
 }
 
-/* Progression blessure */
-
-.progress-container {
-margin-top: 10px;
-}
-
-.progress-bar {
-width: 100%;
-height: 14px;
-border-radius: 999px;
-background: #e5e7eb;
-overflow: hidden;
-box-shadow: inset 0 0 4px rgba(15, 23, 42, 0.12);
-}
-
-.progress-fill {
-height: 100%;
-border-radius: 999px;
-background: linear-gradient(90deg, #f97316, var(--sf-pink), #22c55e);
-}
-
-.progress-text-row {
-display: flex;
-justify-content: space-between;
-font-size: 0.75rem;
-color: var(--text-muted);
-margin-top: 4px;
-}
-
-/* Tendances */
-
 .trend-up {
 color: #16a34a;
 font-size: 0.75rem;
@@ -597,8 +606,6 @@ color: #6b7280;
 font-size: 0.75rem;
 }
 
-/* Différence D/G */
-
 .diff-ok {
 color: #16a34a;
 font-size: 0.8rem;
@@ -609,82 +616,108 @@ color: #dc2626;
 font-size: 0.8rem;
 }
 
-/* Rééducation – planner volume / HSR */
+/* Rééducation intelligente */
 
-.rehab-section {
-margin-top: 12px;
+.rehab-tabs {
+display: flex;
+gap: 6px;
+margin-top: 10px;
+margin-bottom: 6px;
+}
+
+.rehab-tab {
+font-size: 0.75rem;
+padding: 4px 10px;
+border-radius: 999px;
+border: 1px solid var(--border-soft);
+background: #f9fafb;
+cursor: pointer;
+}
+
+.rehab-tab.active {
+background: linear-gradient(135deg, var(--sf-pink), var(--sf-blue));
+color: #fff;
+border-color: transparent;
+}
+
+.rehab-panel {
+display: none;
+}
+
+.rehab-panel.active {
+display: block;
+}
+
+.rehab-planner {
+margin-top: 6px;
 }
 
 .rehab-grid {
 display: grid;
-grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 gap: 8px;
-margin-top: 6px;
 }
 
-.rehab-card {
-border-radius: var(--radius-md);
-border: 1px solid var(--border-soft);
-padding: 8px;
-background: #f9fafb;
-}
-
-.rehab-title {
-font-size: 0.8rem;
-font-weight: 600;
-margin-bottom: 4px;
-}
-
-.rehab-row {
+.rehab-input-row {
 display: flex;
-justify-content: space-between;
+flex-wrap: wrap;
 align-items: center;
-gap: 6px;
+gap: 4px;
+font-size: 0.8rem;
 margin-top: 4px;
 }
 
-.rehab-label {
-font-size: 0.75rem;
-color: var(--text-muted);
-}
-
-.rehab-input {
-width: 90px;
-padding: 3px 6px;
-font-size: 0.8rem;
-border-radius: 6px;
+.rehab-input-row input[type="number"] {
+width: 60px;
+border-radius: 999px;
 border: 1px solid var(--border-soft);
-}
-
-.rehab-select {
-padding: 3px 6px;
+padding: 2px 6px;
 font-size: 0.8rem;
-border-radius: 6px;
-border: 1px solid var(--border-soft);
-}
-
-.rehab-value {
-font-size: 0.85rem;
-font-weight: 600;
 }
 
 .rehab-buttons {
 display: flex;
+flex-wrap: wrap;
 gap: 4px;
 margin-top: 4px;
 }
 
 .rehab-btn {
-font-size: 0.7rem;
-padding: 3px 6px;
+font-size: 0.75rem;
+padding: 2px 8px;
 border-radius: 999px;
 border: 1px solid var(--border-soft);
-background: #fff;
+background: #f9fafb;
 cursor: pointer;
 }
 
 .rehab-btn:hover {
 background: #e5e7eb;
+}
+
+.rehab-result {
+font-size: 0.8rem;
+margin-top: 4px;
+}
+
+/* Tests fonctionnels globaux */
+
+.functional-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+gap: 8px;
+}
+
+.functional-canvas-wrapper {
+margin-top: 8px;
+border-radius: var(--radius-md);
+border: 1px solid var(--border-soft);
+padding: 8px;
+background: #fff;
+}
+
+.functional-canvas-wrapper .info-label {
+margin-bottom: 4px;
 }
 
 /* Responsive */
