@@ -77,7 +77,7 @@ antecedents: "Aucune",
 taille: 180,
 poids: 86,
 masseGrasse: 9,
-photoUrl: "", // pas de lien fourni pour l'instant
+photoUrl: "",
 },
 {
 id: "J005",
@@ -131,7 +131,7 @@ antecedents: "Ischio G 2022",
 taille: 186,
 poids: 90,
 masseGrasse: 9,
-photoUrl: "", // initiales
+photoUrl: "",
 },
 {
 id: "J008",
@@ -149,7 +149,7 @@ antecedents: "Lombalgies récidivantes",
 taille: 192,
 poids: 112,
 masseGrasse: 14,
-photoUrl: "https://drive.google.com/uc?export=view&id=1xL1BosO3Likv1MhdXxnEXs8_4q5hPvpK", // j'utilise sa photo
+photoUrl: "https://drive.google.com/uc?export=view&id=1xL1BosO3Likv1MhdXxnEXs8_4q5hPvpK",
 },
 {
 id: "J009",
@@ -279,7 +279,7 @@ photoUrl: "https://drive.google.com/uc?export=view&id=1LbDhmowDjbDF7ZTymXSvEoTYt
 },
 ];
 
-// Principaux tests : CMJ, Sprint 10/30m, McCall, KTW, isocinétique, etc.
+// Tests physiques (CMJ, sprint, McCall, KTW, isocinétique…)
 const testsPhysiques = [
 // ASI Braxton (J001)
 { id: "T001", joueurId: "J001", date: "2025-11-10", type: "CMJ", segment: "Hanche", cote: "-", valeur: 42, unite: "cm", ref: 40, ratio: 1.05, zone: "Vert" },
@@ -332,11 +332,30 @@ const testsPhysiques = [
 { id: "T703", joueurId: "J008", date: "2025-11-07", type: "Isocinétique quadriceps", segment: "Genou", cote: "Gauche", valeur: 182, unite: "%BW", ref: 180, ratio: 1.01, zone: "Vert" },
 ];
 
+// Tests fonctionnels globaux : DC, tractions, IMTP, 1080, Vitesse max etc.
+const testsFonctionnels = [
+{ joueurId: "J001", dc1rm: 110, tractions: 10, imtp: 2800, f1080: 8.5, vmax: 9.1 },
+{ joueurId: "J002", dc1rm: 95, tractions: 8, imtp: 2600, f1080: 8.0, vmax: 9.0 },
+{ joueurId: "J003", dc1rm: 140, tractions: 6, imtp: 3200, f1080: 7.8, vmax: 8.2 },
+{ joueurId: "J004", dc1rm: 105, tractions: 11, imtp: 2750, f1080: 8.6, vmax: 9.3 },
+{ joueurId: "J005", dc1rm: 120, tractions: 8, imtp: 2900, f1080: 8.0, vmax: 8.8 },
+{ joueurId: "J006", dc1rm: 110, tractions: 10, imtp: 2700, f1080: 8.7, vmax: 9.4 },
+{ joueurId: "J007", dc1rm: 100, tractions: 9, imtp: 2650, f1080: 8.3, vmax: 9.0 },
+{ joueurId: "J008", dc1rm: 135, tractions: 7, imtp: 3100, f1080: 8.1, vmax: 8.5 },
+{ joueurId: "J009", dc1rm: 105, tractions: 10, imtp: 2720, f1080: 8.5, vmax: 9.2 },
+{ joueurId: "J010", dc1rm: 100, tractions: 9, imtp: 2680, f1080: 8.4, vmax: 9.0 },
+{ joueurId: "J011", dc1rm: 125, tractions: 8, imtp: 2950, f1080: 8.1, vmax: 8.6 },
+{ joueurId: "J012", dc1rm: 130, tractions: 7, imtp: 3050, f1080: 7.9, vmax: 8.4 },
+{ joueurId: "J013", dc1rm: 120, tractions: 7, imtp: 2980, f1080: 8.0, vmax: 8.5 },
+{ joueurId: "J014", dc1rm: 110, tractions: 11, imtp: 2750, f1080: 8.8, vmax: 9.4 },
+{ joueurId: "J015", dc1rm: 108, tractions: 10, imtp: 2730, f1080: 8.6, vmax: 9.3 },
+];
+
 // Blessures & rééduc
 const blessures = [
 {
 id: "B001",
-joueurId: "J002", // BLUM Martin
+joueurId: "J002",
 dateBlessure: "2025-10-29",
 diagnostic: "Lésion ischio BFlh grade 2",
 localisation: "Ischio Droit",
@@ -360,7 +379,7 @@ etapesCles: "IRM, test excentrique, test sprint 90%, test terrain poste, validat
 },
 {
 id: "B002",
-joueurId: "J003", // BOTHA Jacques
+joueurId: "J003",
 dateBlessure: "2025-10-25",
 diagnostic: "Instabilité acromio-claviculaire",
 localisation: "Épaule G",
@@ -383,7 +402,7 @@ etapesCles: "Imagerie initiale, avis chir, validation force, test plaquage progr
 },
 {
 id: "B003",
-joueurId: "J005", // KOFFI Isaac cheville
+joueurId: "J005",
 dateBlessure: "2025-11-01",
 diagnostic: "Entorse LLA cheville G",
 localisation: "Cheville G",
@@ -405,7 +424,7 @@ etapesCles: "KTW symétrique, test appui unipodal, test terrain 100%",
 },
 {
 id: "B004",
-joueurId: "J007", // RUSSEL Luka ischio
+joueurId: "J007",
 dateBlessure: "2025-10-30",
 diagnostic: "Lésion ischio semi-tendineux G grade 1",
 localisation: "Ischio G",
@@ -686,6 +705,9 @@ profilSection.innerHTML = `
 `;
 detail.appendChild(profilSection);
 
+// SECTION TESTS FONCTIONNELS GLOBAUX
+renderFunctionalSection(detail, joueur);
+
 // SECTION GPS
 renderGpsSection(detail, joueur);
 
@@ -714,6 +736,117 @@ detail.appendChild(testsSection);
 
 renderSegmentTabs(joueur);
 renderTestsSection(joueur);
+}
+
+// --- TESTS FONCTIONNELS & PROFIL F-V ---
+
+function renderFunctionalSection(detail, joueur) {
+const data = testsFonctionnels.find((t) => t.joueurId === joueur.id);
+const section = document.createElement("div");
+section.className = "section";
+
+section.innerHTML = `
+<h3 class="section-title"><span class="icon">🏋️‍♂️</span> Tests fonctionnels globaux</h3>
+`;
+
+if (!data) {
+section.innerHTML += `<div class="section-content">Tests fonctionnels à compléter.</div>`;
+detail.appendChild(section);
+return;
+}
+
+const grid = document.createElement("div");
+grid.className = "functional-grid";
+grid.innerHTML = `
+<div class="info-card">
+<div class="info-label">Développé couché 1RM</div>
+<div class="info-value">${data.dc1rm} kg</div>
+</div>
+<div class="info-card">
+<div class="info-label">Tractions complètes</div>
+<div class="info-value">${data.tractions} reps</div>
+</div>
+<div class="info-card">
+<div class="info-label">IMTP</div>
+<div class="info-value">${data.imtp} N</div>
+</div>
+<div class="info-card">
+<div class="info-label">Puissance 1080 Sprint</div>
+<div class="info-value">${data.f1080} W/kg</div>
+</div>
+<div class="info-card">
+<div class="info-label">Vitesse max estimée</div>
+<div class="info-value">${data.vmax} m/s</div>
+</div>
+`;
+section.appendChild(grid);
+
+const canvasWrapper = document.createElement("div");
+canvasWrapper.className = "functional-canvas-wrapper";
+canvasWrapper.innerHTML = `
+<div class="info-label">Profil force–vitesse (schéma simplifié)</div>
+<canvas id="fvCanvas-${joueur.id}" width="420" height="140"></canvas>
+`;
+section.appendChild(canvasWrapper);
+
+detail.appendChild(section);
+
+const canvas = document.getElementById(`fvCanvas-${joueur.id}`);
+if (canvas) {
+drawFVProfile(canvas, data);
+}
+}
+
+function drawFVProfile(canvas, data) {
+const ctx = canvas.getContext("2d");
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+const padding = 24;
+const w = canvas.width - padding * 2;
+const h = canvas.height - padding * 2;
+
+// Force max & vitesse max normalisées
+const fMax = data.imtp || 2500;
+const vMax = data.vmax || 9;
+const fRef = 3500;
+const vRef = 10;
+
+const fNorm = Math.min(fMax / fRef, 1.2);
+const vNorm = Math.min(vMax / vRef, 1.2);
+
+// Axes
+ctx.strokeStyle = "#cbd5f5";
+ctx.lineWidth = 1;
+ctx.beginPath();
+ctx.moveTo(padding, padding + h);
+ctx.lineTo(padding, padding);
+ctx.moveTo(padding, padding + h);
+ctx.lineTo(padding + w, padding + h);
+ctx.stroke();
+
+ctx.fillStyle = "#6b7280";
+ctx.font = "10px system-ui";
+ctx.fillText("Force", padding - 5, padding - 8);
+ctx.fillText("Vitesse", padding + w - 30, padding + h + 14);
+
+// Ligne F-V théorique
+ctx.strokeStyle = "#e5e7eb";
+ctx.beginPath();
+ctx.moveTo(padding + w * 0.05, padding + h * 0.1);
+ctx.lineTo(padding + w * 0.95, padding + h * 0.9);
+ctx.stroke();
+
+// Point profil réel
+const x = padding + w * Math.min(vNorm, 1);
+const y = padding + h * (1 - Math.min(fNorm, 1));
+
+ctx.fillStyle = "#ff2e9a";
+ctx.beginPath();
+ctx.arc(x, y, 5, 0, Math.PI * 2);
+ctx.fill();
+
+ctx.fillStyle = "#6b7280";
+ctx.fillText("Profil actuel", x + 6, y - 6);
 }
 
 // --- GPS ---
@@ -795,7 +928,7 @@ gpsSection.appendChild(table);
 detail.appendChild(gpsSection);
 }
 
-// --- BLESSURES / RÉÉDUC + PROGRESSION ---
+// --- BLESSURES / RÉÉDUC + PROGRESSION & PLANNIF INTELLIGENTE ---
 
 function renderBlessureSection(detail, joueur) {
 const blessureSection = document.createElement("div");
@@ -817,7 +950,6 @@ return;
 const blessure = blessureList[0];
 const phaseClass = getPhaseClass(blessure.phase);
 
-// Progression RTT (0-100%)
 const today = new Date();
 const d0 = new Date(blessure.dateBlessure);
 const dRtt = blessure.rttEstimee ? new Date(blessure.rttEstimee) : null;
@@ -828,19 +960,20 @@ const done = Math.min(Math.max(today - d0, 0), total);
 progress = Math.round((done / total) * 100);
 }
 
-let protocoleHtml = "";
-if (blessure.protocole) {
-Object.entries(blessure.protocole).forEach(([k, v]) => {
-protocoleHtml += `
-<div class="protocole-week">
-<div class="protocole-week-title">${k.toUpperCase().replace("SEMAINE", "Semaine ")}</div>
-<div class="protocole-week-content">${v}</div>
-</div>
-`;
-});
+// Référence GPS avant blessure
+const gpsBefore = gpsData.filter(
+(g) => g.joueurId === joueur.id && new Date(g.date) < d0
+);
+let refDistance = 6500;
+let refHSR = 600;
+if (gpsBefore.length > 0) {
+const sumD = gpsBefore.reduce((acc, g) => acc + g.totalDistance, 0);
+const sumH = gpsBefore.reduce((acc, g) => acc + g.hsr, 0);
+refDistance = Math.round(sumD / gpsBefore.length);
+refHSR = Math.round(sumH / gpsBefore.length);
 }
 
-const seancesBlessure = seances.filter((s) => s.blessureId === blessure.id);
+const blessureId = blessure.id;
 
 blessureSection.innerHTML = `
 <h3 class="section-title"><span class="icon">🩺</span> Pathologie & rééducation</h3>
@@ -871,23 +1004,84 @@ RTP estimée : ${blessure.rtpEstimee || "-"}
 <div class="info-label">Progression vers RTT</div>
 <div class="progress-bar">
 <div class="progress-fill" style="width:${progress}%;"></div>
+<div class="progress-marks">
+<span class="progress-mark"></span>
+<span class="progress-mark"></span>
+<span class="progress-mark"></span>
+<span class="progress-mark"></span>
+</div>
 </div>
 <div class="progress-text">${progress}% du protocole réalisé (objectif RTT = 100%)</div>
 </div>
 
+<div class="rehab-tabs">
+<button type="button" class="rehab-tab active" data-tab="synthese-${blessureId}">Synthèse</button>
+<button type="button" class="rehab-tab" data-tab="planif-${blessureId}">Rééducation (planif intelligente)</button>
+</div>
+
+<div id="synthese-${blessureId}" class="rehab-panel active">
 <div class="section-content" style="margin-top:8px;">
 <div class="info-card">
 <div class="info-label">Étapes clés & checks</div>
 <div class="info-value">${blessure.etapesCles || "-"}</div>
 </div>
 </div>
-
 <h4 style="margin-top:10px;font-size:0.85rem;">Protocole semaine par semaine</h4>
-${protocoleHtml || "<div class='section-content'>Protocole détaillé à définir.</div>"}
-
+<div id="protocole-${blessureId}"></div>
 <h4 style="margin-top:10px;font-size:0.85rem;">Séances de rééducation</h4>
+<div id="seances-${blessureId}"></div>
+</div>
+
+<div id="planif-${blessureId}" class="rehab-panel">
+<div class="rehab-planner">
+<div class="info-card">
+<div class="info-label">Référence volume hebdo (AVANT blessure)</div>
+<div class="info-value">${refDistance} m • HSR ${refHSR} m</div>
+</div>
+<div class="rehab-grid" style="margin-top:6px;">
+<div class="info-card">
+<div class="info-label">Séance actuelle (objectif % de la ref.)</div>
+<div class="rehab-input-row">
+<span>Volume (%)</span>
+<input type="number" min="0" max="150" value="70" id="rehab-vol-${blessureId}" />
+<span>HSR (%)</span>
+<input type="number" min="0" max="150" value="50" id="rehab-hsr-${blessureId}" />
+</div>
+<div class="rehab-result" id="rehab-current-${blessureId}"></div>
+</div>
+<div class="info-card">
+<div class="info-label">Prochaine séance (augmentation)</div>
+<div class="rehab-buttons">
+<button type="button" class="rehab-btn" data-inc="10" data-id="${blessureId}">+10%</button>
+<button type="button" class="rehab-btn" data-inc="15" data-id="${blessureId}">+15%</button>
+<button type="button" class="rehab-btn" data-inc="20" data-id="${blessureId}">+20%</button>
+</div>
+<div class="rehab-result" id="rehab-next-${blessureId}"></div>
+</div>
+</div>
+</div>
+</div>
 `;
 
+// Protocole HTML
+const protocoleContainer = blessureSection.querySelector(`#protocole-${blessureId}`);
+if (blessure.protocole && protocoleContainer) {
+let protocoleHtml = "";
+Object.entries(blessure.protocole).forEach(([k, v]) => {
+protocoleHtml += `
+<div class="protocole-week">
+<div class="protocole-week-title">${k.toUpperCase().replace("SEMAINE", "Semaine ")}</div>
+<div class="protocole-week-content">${v}</div>
+</div>
+`;
+});
+protocoleContainer.innerHTML = protocoleHtml;
+}
+
+// Séances
+const seancesBlessure = seances.filter((s) => s.blessureId === blessure.id);
+const seancesContainer = blessureSection.querySelector(`#seances-${blessureId}`);
+if (seancesContainer) {
 const table = document.createElement("table");
 table.className = "table-like";
 table.innerHTML = `
@@ -916,9 +1110,65 @@ ${seancesBlessure
 .join("")}
 </tbody>
 `;
+seancesContainer.appendChild(table);
+}
 
-blessureSection.appendChild(table);
 detail.appendChild(blessureSection);
+
+initRehabTabs(blessureId);
+initRehabPlanner(blessureId, refDistance, refHSR);
+}
+
+function initRehabTabs(blessureId) {
+const tabs = document.querySelectorAll(`.rehab-tab[data-tab$="-${blessureId}"]`);
+tabs.forEach((tab) => {
+tab.addEventListener("click", () => {
+tabs.forEach((t) => t.classList.remove("active"));
+tab.classList.add("active");
+const targetId = tab.getAttribute("data-tab");
+const panels = document.querySelectorAll(`#synthese-${blessureId}, #planif-${blessureId}`);
+panels.forEach((p) => p.classList.remove("active"));
+const target = document.getElementById(targetId);
+if (target) target.classList.add("active");
+});
+});
+}
+
+function initRehabPlanner(blessureId, refDistance, refHSR) {
+const volInput = document.getElementById(`rehab-vol-${blessureId}`);
+const hsrInput = document.getElementById(`rehab-hsr-${blessureId}`);
+const currentDiv = document.getElementById(`rehab-current-${blessureId}`);
+const nextDiv = document.getElementById(`rehab-next-${blessureId}`);
+const buttons = document.querySelectorAll(`.rehab-btn[data-id="${blessureId}"]`);
+
+if (!volInput || !hsrInput || !currentDiv || !nextDiv) return;
+
+function updateCurrent() {
+const v = parseFloat(volInput.value) || 0;
+const h = parseFloat(hsrInput.value) || 0;
+const dist = Math.round((v / 100) * refDistance);
+const hsr = Math.round((h / 100) * refHSR);
+currentDiv.textContent = `Séance actuelle : ${dist} m de course • ${hsr} m de HSR (${v}% / ${h}%)`;
+}
+
+function updateNext(increment) {
+const v = (parseFloat(volInput.value) || 0) + increment;
+const h = (parseFloat(hsrInput.value) || 0) + increment;
+const dist = Math.round((v / 100) * refDistance);
+const hsr = Math.round((h / 100) * refHSR);
+nextDiv.textContent = `Prochaine séance cible : ${dist} m de course • ${hsr} m de HSR (${v}% / ${h}%)`;
+}
+
+volInput.addEventListener("input", updateCurrent);
+hsrInput.addEventListener("input", updateCurrent);
+buttons.forEach((btn) => {
+btn.addEventListener("click", () => {
+const inc = parseFloat(btn.getAttribute("data-inc")) || 10;
+updateNext(inc);
+});
+});
+
+updateCurrent();
 }
 
 // --- SEGMENTS + TESTS ---
@@ -1039,7 +1289,6 @@ const sameTypeAll = testsPhysiques
 .filter((t) => t.joueurId === joueur.id && t.type === test.type)
 .sort((a, b) => (a.date > b.date ? 1 : -1));
 
-// Comparaison D/G sur la date du test
 const sameDate = sameTypeAll.filter((t) => t.date === test.date);
 let droite = null;
 let gauche = null;
@@ -1048,7 +1297,7 @@ if (t.cote === "Droit") droite = t;
 if (t.cote === "Gauche") gauche = t;
 });
 
-// Tendance (par rapport à la mesure précédente du même test et même côté)
+// Tendance
 let trendHtml = "";
 const sameSide = sameTypeAll.filter((t) => t.cote === test.cote || test.cote === "-");
 if (sameSide.length > 1) {
@@ -1073,7 +1322,6 @@ trendIcon = "↓";
 text = "En baisse";
 }
 } else {
-// plus bas = meilleur
 if (current < previous) {
 trendClass = "trend-up";
 trendIcon = "↑";
@@ -1142,7 +1390,6 @@ ${diffHtml ? `<div class="info-card">${diffHtml}</div>` : ""}
 `;
 }
 
-// Graphique simple d'évolution (ratio)
 const canvas = detailWrapper.querySelector("#testChart");
 if (!canvas) return;
 const ctx = canvas.getContext("2d");
