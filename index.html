@@ -1,58 +1,58 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <title>Suivi Joueurs Rugby Pro</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="UTF-8" />
+<title>Suivi Joueurs Rugby Pro</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="app">
-    <header class="app-header">
-      <div class="logo-title">
-        <div class="logo-circle">SF</div>
-        <div>
-          <h1>Suivi effectif rugby</h1>
-          <p>Staff médical & performance</p>
-        </div>
-      </div>
-      <div class="header-stats">
-        <div class="stat-card stat-available">
-          <span class="stat-label">Joueurs disponibles</span>
-          <span id="stat-disponibles" class="stat-value">0</span>
-        </div>
-        <div class="stat-card stat-injury">
-          <span class="stat-label">Infirmerie</span>
-          <span id="stat-infirmerie" class="stat-value">0</span>
-        </div>
-      </div>
-    </header>
+<div class="app">
+<header class="app-header">
+<div class="logo-title">
+<div class="logo-circle">SF</div>
+<div>
+<h1>Suivi effectif rugby</h1>
+<p>Staff médical & performance</p>
+</div>
+</div>
+<div class="header-stats">
+<div class="stat-card stat-available">
+<span class="stat-label">Joueurs disponibles</span>
+<span id="stat-disponibles" class="stat-value">0</span>
+</div>
+<div class="stat-card stat-injury">
+<span class="stat-label">Joueurs blessés</span>
+<span id="stat-infirmerie" class="stat-value">0</span>
+</div>
+</div>
+</header>
 
-    <main class="app-main">
-      <!-- Colonne gauche : effectif -->
-      <section class="left-panel">
-        <div class="filters">
-          <label for="filterSelect">Filtrer :</label>
-          <select id="filterSelect">
-            <option value="all">Tout l’effectif</option>
-            <option value="available">Joueurs disponibles</option>
-            <option value="injury">Joueurs blessés</option>
-          </select>
-        </div>
-        <div id="playersList" class="players-list">
-          <!-- Cartes joueurs injectées par JS -->
-        </div>
-      </section>
+<main class="app-main">
+<!-- Colonne gauche : effectif -->
+<section class="left-panel">
+<div class="filters">
+<label for="filterSelect">Filtrer :</label>
+<select id="filterSelect">
+<option value="all">Tout l’effectif</option>
+<option value="available">Joueurs disponibles</option>
+<option value="injury">Joueurs blessés</option>
+</select>
+</div>
+<div id="playersList" class="players-list">
+<!-- Cartes joueurs injectées par JS -->
+</div>
+</section>
 
-      <!-- Colonne droite : fiche joueur -->
-      <section class="right-panel">
-        <div id="playerDetail" class="player-detail empty-state">
-          <p>Sélectionne un joueur dans la liste pour voir le détail.</p>
-        </div>
-      </section>
-    </main>
-  </div>
+<!-- Colonne droite : fiche joueur -->
+<section class="right-panel">
+<div id="playerDetail" class="player-detail empty-state">
+<p>Sélectionne un joueur dans la liste pour voir le détail.</p>
+</div>
+</section>
+</main>
+</div>
 
-  <script src="app.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
