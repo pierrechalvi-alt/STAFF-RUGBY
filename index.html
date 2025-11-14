@@ -8,12 +8,55 @@
 <!-- Police moderne Inter -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
+<!-- CSS global -->
 <link rel="stylesheet" href="styles.css" />
+
+<!-- PATCH VISUEL : pastilles + texte Forts/Faibles -->
+<style>
+/* Pastilles état joueur (petites, rectangulaires, élégantes) */
+.badge {
+display: inline-block !important;
+padding: 2px 8px !important;
+font-size: 0.7rem !important;
+font-weight: 600 !important;
+border-radius: 6px !important;
+line-height: 1.1 !important;
+white-space: nowrap !important;
+border: 1px solid rgba(0,0,0,0.06) !important;
+}
+
+.badge-disponible {
+background: #e8f9ef !important;
+color: #15803d !important;
+border-color: #bbf7d0 !important;
+}
+
+.badge-blesse {
+background: #fdecef !important;
+color: #be123c !important;
+border-color: #fecdd3 !important;
+}
+
+.badge-adapte {
+background: #fff7ed !important; /* orange clair */
+color: #c2410c !important; /* orange foncé */
+border-color: #fed7aa !important;
+}
+
+/* Texte "Poste / Forts / Faibles" plus petit et non gras */
+.player-sub {
+font-size: 0.75rem !important;
+font-weight: 400 !important;
+opacity: 0.9 !important;
+line-height: 1.3 !important;
+}
+</style>
 </head>
+
 <body>
 <div class="app">
 
-<!-- HEADER -->
+<!-- HEADER STADE FRANÇAIS -->
 <header class="app-header">
 <div class="header-left">
 <div class="logo-raw">
@@ -22,7 +65,7 @@
 
 <div class="header-title-block">
 <h1>Stade Français Paris</h1>
-<p>Suivi joueurs · Staff médical & performance</p>
+<p>Suivi joueurs · Staff médical &amp; performance</p>
 </div>
 </div>
 
@@ -54,12 +97,11 @@
 </select>
 </div>
 
-<div id="playersList" class="players-list">
-<!-- Généré par app.js -->
-</div>
+<!-- Liste générée dynamiquement par app.js -->
+<div id="playersList" class="players-list"></div>
 </section>
 
-<!-- PANEL DROITE : FICHE JOUEUR -->
+<!-- PANEL DROITE : FICHE JOUEUR DÉTAILLÉE -->
 <section class="right-panel">
 <div id="playerDetail" class="player-detail empty-state">
 <p>Sélectionne un joueur dans la liste pour voir le détail.</p>
@@ -67,9 +109,9 @@
 </section>
 
 </main>
-
 </div>
 
+<!-- LOGIQUE JS (génération cartes, fiche joueur, rehab, GPS, etc.) -->
 <script src="app.js"></script>
 </body>
 </html>
