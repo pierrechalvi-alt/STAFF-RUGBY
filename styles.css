@@ -130,6 +130,9 @@ border-radius: var(--radius-lg);
 padding: 12px;
 color: #fff;
 box-shadow: var(--shadow-soft);
+display: flex;
+flex-direction: column;
+height: 100%;
 }
 
 .filters {
@@ -186,7 +189,8 @@ box-shadow: 0 0 0 1px rgba(255, 46, 154, 0.4);
 display: flex;
 flex-direction: column;
 gap: 8px;
-max-height: calc(100vh - 200px);
+flex: 1; /* prend tout l’espace dispo sous les filtres */
+min-height: 0; /* important pour que le scroll fonctionne bien */
 overflow-y: auto;
 }
 
