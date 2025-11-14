@@ -48,12 +48,20 @@
 <!-- PANEL GAUCHE : LISTE JOUEURS -->
 <section class="left-panel">
 <div class="filters">
+<div class="filters-main">
 <label for="filterSelect">Filtrer :</label>
 <select id="filterSelect">
 <option value="all">Tout l’effectif</option>
 <option value="available">Joueurs disponibles</option>
 <option value="injury">Joueurs blessés</option>
 </select>
+</div>
+<input
+type="text"
+id="searchInput"
+placeholder="Rechercher (nom, poste...)"
+autocomplete="off"
+/>
 </div>
 
 <!-- Liste générée dynamiquement par app.js -->
