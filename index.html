@@ -5,39 +5,45 @@
 <title>Suivi Joueurs – Stade Français Paris</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<!-- Police moderne type Inter -->
+<!-- Police moderne Inter -->
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 <div class="app">
+
+<!-- HEADER -->
 <header class="app-header">
-<div class="logo-title">
-<div class="logo-circle">
-<!-- IMPORTANT : ton logo est dans le dossier "Image" -->
-<img src="Image/stade_français.png" alt="Stade Français" class="logo-img">
+<div class="header-left">
+<div class="logo-raw">
+<img src="Image/SFP.png" alt="Stade Français" class="logo-raw-img">
 </div>
-<div>
-<h1>Suivi joueurs</h1>
-<p>Staff médical & performance – Stade Français Paris</p>
+
+<div class="header-title-block">
+<h1>Stade Français Paris</h1>
+<p>Suivi joueurs · Staff médical & performance</p>
 </div>
 </div>
 
+<div class="header-right">
 <div class="header-stats">
 <div class="stat-card stat-available">
-<span class="stat-label">Joueurs disponibles</span>
+<span class="stat-label">Disponibles</span>
 <span id="stat-disponibles" class="stat-value">0</span>
 </div>
 <div class="stat-card stat-injury">
-<span class="stat-label">Joueurs blessés</span>
+<span class="stat-label">Blessés / adaptés</span>
 <span id="stat-infirmerie" class="stat-value">0</span>
+</div>
 </div>
 </div>
 </header>
 
+<!-- MAIN LAYOUT -->
 <main class="app-main">
-<!-- Colonne gauche : effectif -->
+
+<!-- PANEL GAUCHE : LISTE JOUEURS -->
 <section class="left-panel">
 <div class="filters">
 <label for="filterSelect">Filtrer :</label>
@@ -47,18 +53,21 @@
 <option value="injury">Joueurs blessés</option>
 </select>
 </div>
+
 <div id="playersList" class="players-list">
-<!-- Cartes joueurs injectées par app.js -->
+<!-- Généré par app.js -->
 </div>
 </section>
 
-<!-- Colonne droite : fiche joueur -->
+<!-- PANEL DROITE : FICHE JOUEUR -->
 <section class="right-panel">
 <div id="playerDetail" class="player-detail empty-state">
 <p>Sélectionne un joueur dans la liste pour voir le détail.</p>
 </div>
 </section>
+
 </main>
+
 </div>
 
 <script src="app.js"></script>
