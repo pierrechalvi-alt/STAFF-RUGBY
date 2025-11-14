@@ -783,3 +783,31 @@ text-align: left;
 align-items: flex-start;
 }
 }
+/* === PATCH PASTILLES ÉTAT JOUEUR (version mini) === */
+.player-card .badge {
+padding: 1px 6px; /* moins haut et moins large */
+font-size: 0.65rem; /* texte plus petit */
+line-height: 1.1;
+border-radius: 6px; /* petit rectangle arrondi, pas gros pilulier */
+font-weight: 600;
+align-self: center; /* bien centré verticalement dans la carte */
+}
+
+/* (les couleurs restent celles que tu as déjà définies) */
+.badge-disponible {
+background: #e8f9ef;
+color: #15803d;
+border-color: #bbf7d0;
+}
+
+.badge-blesse {
+background: #fdecef;
+color: #be123c;
+border-color: #fecdd3;
+}
+
+.badge-adapte {
+background: #fff7ed;
+color: #c2410c;
+border-color: #fed7aa;
+}
