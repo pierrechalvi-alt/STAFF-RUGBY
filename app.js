@@ -1828,6 +1828,8 @@ ctx.fillText(`Évolution ${test.type} (ratio)`, paddingX, paddingY + 10);
 
 // --- INIT -- -
 
+// --- INIT ---
+
 function init() {
 renderStats();
 renderPlayersList();
@@ -1836,7 +1838,7 @@ const select = document.getElementById("filterSelect");
 select.addEventListener("change", () => {
 renderPlayersList();
 const detail = document.getElementById("playerDetail");
-if if (!currentPlayerId) {
+if (!currentPlayerId) {
 detail.classList.add("empty-state");
 detail.innerHTML = `
 <div class="empty-welcome">
@@ -1847,6 +1849,9 @@ detail.innerHTML = `
 `;
 }
 });
+}
+
+document.addEventListener("DOMContentLoaded", init);
 
 const searchInput = document.getElementById("searchInput");
 if (searchInput) {
