@@ -1,19 +1,18 @@
-// --- ÉTAT GLOBAL -- -
+// --- ÉTAT GLOBAL ---
 
 let currentPlayerId = null;
 let selectedSegment = "Global";
 let selectedTestId = null;
-let searchTerm = ""; // terme de recherche texte
 
-// --- DONNÉES DEMO avec vrais noms (postes corrigés / minutes jouées fictives) ---
+// --- DONNÉES DEMO avec vrais noms (postes inventés) ---
 
 const joueurs = [
 {
 id: "J001",
 nom: "Braxton",
 prenom: "ASI",
-poste: "1",
-ligne: "Pilier",
+poste: "9",
+ligne: "Arrière",
 statut: "Disponible",
 disponibilite: "Disponible",
 dernierTest: "2025-11-10",
@@ -24,15 +23,14 @@ antecedents: "Entorse cheville D 2023",
 taille: 178,
 poids: 82,
 masseGrasse: 10,
-minutesJouees: 320,
 photoUrl: "Image/asi.png",
 },
 {
 id: "J002",
 nom: "Martin",
 prenom: "BLUM",
-poste: "9",
-ligne: "Demi de mêlée",
+poste: "11",
+ligne: "Arrière",
 statut: "Blessé",
 disponibilite: "Infirmerie",
 dernierTest: "2025-11-05",
@@ -43,15 +41,14 @@ antecedents: "Ischio D 2023; Cheville G 2021",
 taille: 182,
 poids: 88,
 masseGrasse: 11,
-minutesJouees: 410,
 photoUrl: "Image/blum.png",
 },
 {
 id: "J003",
 nom: "Jacques",
 prenom: "BOTHA",
-poste: "4",
-ligne: "Deuxième ligne",
+poste: "3",
+ligne: "Avant",
 statut: "Adapté",
 disponibilite: "Infirmerie",
 dernierTest: "2025-11-08",
@@ -62,15 +59,14 @@ antecedents: "Épaule G 2023",
 taille: 185,
 poids: 122,
 masseGrasse: 18,
-minutesJouees: 280,
 photoUrl: "Image/botha.png",
 },
 {
 id: "J004",
 nom: "Alvaro",
 prenom: "GARCIA ALBO",
-poste: "2",
-ligne: "Talonneur",
+poste: "10",
+ligne: "Arrière",
 statut: "Disponible",
 disponibilite: "Disponible",
 dernierTest: "2025-11-09",
@@ -81,15 +77,14 @@ antecedents: "Aucune",
 taille: 180,
 poids: 86,
 masseGrasse: 9,
-minutesJouees: 390,
 photoUrl: "Image/garcia.png",
 },
 {
 id: "J005",
 nom: "Isaac",
 prenom: "KOFFI",
-poste: "3",
-ligne: "Pilier",
+poste: "6",
+ligne: "Avant",
 statut: "Blessé",
 disponibilite: "Infirmerie",
 dernierTest: "2025-11-06",
@@ -100,7 +95,6 @@ antecedents: "Entorse LLA cheville G 2022",
 taille: 190,
 poids: 104,
 masseGrasse: 13,
-minutesJouees: 250,
 photoUrl: "Image/koffi.png",
 },
 {
@@ -108,7 +102,7 @@ id: "J006",
 nom: "Noah",
 prenom: "NENE",
 poste: "13",
-ligne: "Centre",
+ligne: "Arrière",
 statut: "Disponible",
 disponibilite: "Disponible",
 dernierTest: "2025-11-10",
@@ -119,15 +113,14 @@ antecedents: "Commotion 2024",
 taille: 184,
 poids: 92,
 masseGrasse: 10,
-minutesJouees: 430,
 photoUrl: "Image/nene.png",
 },
 {
 id: "J007",
 nom: "Luka",
 prenom: "RUSSEL",
-poste: "11",
-ligne: "Ailier",
+poste: "15",
+ligne: "Arrière",
 statut: "Adapté",
 disponibilite: "Infirmerie",
 dernierTest: "2025-11-09",
@@ -138,7 +131,6 @@ antecedents: "Ischio G 2022",
 taille: 186,
 poids: 90,
 masseGrasse: 9,
-minutesJouees: 360,
 photoUrl: "Image/russel.png",
 },
 {
@@ -146,7 +138,7 @@ id: "J008",
 nom: "Mosese",
 prenom: "TABUAKOTO",
 poste: "8",
-ligne: "Troisième ligne",
+ligne: "Avant",
 statut: "Disponible",
 disponibilite: "Disponible",
 dernierTest: "2025-11-07",
@@ -157,14 +149,13 @@ antecedents: "Lombalgies récidivantes",
 taille: 192,
 poids: 112,
 masseGrasse: 14,
-minutesJouees: 445,
 photoUrl: "Image/tabuakoto.png",
 },
 {
 id: "J009",
 nom: "IBO",
 prenom: "Mathis",
-poste: "15",
+poste: "14",
 ligne: "Arrière",
 statut: "Disponible",
 disponibilite: "Disponible",
@@ -176,7 +167,6 @@ antecedents: "Ischio G 2023",
 taille: 183,
 poids: 89,
 masseGrasse: 11,
-minutesJouees: 400,
 photoUrl: "Image/ibo.png",
 },
 {
@@ -184,7 +174,7 @@ id: "J010",
 nom: "Yanis",
 prenom: "LUX",
 poste: "12",
-ligne: "Centre",
+ligne: "Arrière",
 statut: "Disponible",
 disponibilite: "Disponible",
 dernierTest: "2025-11-09",
@@ -195,15 +185,14 @@ antecedents: "Entorse cheville D 2022",
 taille: 181,
 poids: 87,
 masseGrasse: 11,
-minutesJouees: 310,
 photoUrl: "Image/lux.png",
 },
 {
 id: "J011",
 nom: "Yannick",
 prenom: "LODJRO",
-poste: "14",
-ligne: "Ailier",
+poste: "7",
+ligne: "Avant",
 statut: "Disponible",
 disponibilite: "Disponible",
 dernierTest: "2025-11-08",
@@ -214,7 +203,6 @@ antecedents: "Ischio D 2021",
 taille: 188,
 poids: 102,
 masseGrasse: 12,
-minutesJouees: 295,
 photoUrl: "Image/lodjro.png",
 },
 {
@@ -222,7 +210,7 @@ id: "J012",
 nom: "Ollie",
 prenom: "McCREA",
 poste: "4",
-ligne: "Deuxième ligne",
+ligne: "Avant",
 statut: "Disponible",
 disponibilite: "Disponible",
 dernierTest: "2025-11-08",
@@ -233,15 +221,14 @@ antecedents: "Aucune",
 taille: 195,
 poids: 110,
 masseGrasse: 13,
-minutesJouees: 270,
 photoUrl: "Image/mccrea.png",
 },
 {
 id: "J013",
 nom: "Thibault",
 prenom: "MOTASSI",
-poste: "9",
-ligne: "Demi de mêlée",
+poste: "5",
+ligne: "Avant",
 statut: "Disponible",
 disponibilite: "Disponible",
 dernierTest: "2025-11-07",
@@ -252,15 +239,14 @@ antecedents: "Lombalgies 2023",
 taille: 193,
 poids: 108,
 masseGrasse: 14,
-minutesJouees: 260,
 photoUrl: "Image/motassi.png",
 },
 {
 id: "J014",
 nom: "Seta",
 prenom: "TURAGACOKE",
-poste: "6",
-ligne: "Troisième ligne",
+poste: "14",
+ligne: "Arrière",
 statut: "Disponible",
 disponibilite: "Disponible",
 dernierTest: "2025-11-07",
@@ -271,15 +257,14 @@ antecedents: "Ischio D 2022",
 taille: 183,
 poids: 90,
 masseGrasse: 10,
-minutesJouees: 330,
 photoUrl: "Image/turagacoke.png",
 },
 {
 id: "J015",
 nom: "Ethan",
 prenom: "TIA",
-poste: "2",
-ligne: "Talonneur",
+poste: "10",
+ligne: "Arrière",
 statut: "Disponible",
 disponibilite: "Disponible",
 dernierTest: "2025-11-09",
@@ -290,7 +275,6 @@ antecedents: "Entorse genou G 2023",
 taille: 182,
 poids: 88,
 masseGrasse: 10,
-minutesJouees: 345,
 photoUrl: "Image/tia.png",
 },
 ];
@@ -525,60 +509,6 @@ const t = type.toLowerCase();
 return t.includes("sprint") || t.includes("10m") || t.includes("30m");
 }
 
-// tendances neutres (physique)
-function buildNeutralTrendIcon(current, previous) {
-if (previous == null || current == null) return "";
-let icon = "→";
-if (current > previous) icon = "↑";
-else if (current < previous) icon = "↓";
-return `<span class="trend-neutral">${icon}</span>`;
-}
-
-// tendances perf (tests fonc, GPS...)
-function buildPerfTrendIcon(current, previous, higherIsBetter = true) {
-if (previous == null || current == null) return "";
-let trendClass = "trend-neutral";
-let icon = "→";
-if (higherIsBetter) {
-if (current > previous) {
-trendClass = "trend-up";
-icon = "↑";
-} else if (current < previous) {
-trendClass = "trend-down";
-icon = "↓";
-}
-} else {
-if (current < previous) {
-trendClass = "trend-up";
-icon = "↑";
-} else if (current > previous) {
-trendClass = "trend-down";
-icon = "↓";
-}
-}
-return `<span class="${trendClass}">${icon}</span>`;
-}
-
-// toggle pour sous-parties d'historique
-function initSubToggles(root) {
-const scope = root || document;
-scope.querySelectorAll(".subtoggle").forEach((btn) => {
-const targetId = btn.getAttribute("data-target");
-const target = document.getElementById(targetId);
-if (!target) return;
-btn.addEventListener("click", () => {
-const isActive = target.classList.contains("active");
-if (isActive) {
-target.classList.remove("active");
-btn.textContent = "Voir l'historique";
-} else {
-target.classList.add("active");
-btn.textContent = "Masquer l'historique";
-}
-});
-});
-}
-
 // --- STATS ---
 
 function renderStats() {
@@ -601,21 +531,6 @@ if (filter === "available") {
 filtered = filtered.filter((j) => j.disponibilite === "Disponible");
 } else if (filter === "injury") {
 filtered = filtered.filter((j) => j.disponibilite === "Infirmerie");
-}
-
-// Filtre texte : nom / prénom / poste / ligne
-if (searchTerm && searchTerm.trim() !== "") {
-const query = searchTerm.toLowerCase();
-filtered = filtered.filter((j) => {
-const fullName = `${j.prenom} ${j.nom}`.toLowerCase();
-const poste = `poste ${j.poste}`.toLowerCase();
-const ligne = (j.ligne || "").toLowerCase();
-return (
-fullName.includes(query) ||
-poste.includes(query) ||
-ligne.includes(query)
-);
-});
 }
 
 filtered.forEach((j) => {
@@ -717,12 +632,17 @@ const tagStatut = document.createElement("span");
 tagStatut.className = "ph-tag";
 tagStatut.textContent = joueur.statut;
 
-const tagMinutes = document.createElement("span");
-tagMinutes.className = "ph-tag";
-tagMinutes.textContent = `Minutes jouées : ${joueur.minutesJouees ?? "-"}`;
+const tagDisp = document.createElement("span");
+tagDisp.className = "ph-tag";
+tagDisp.textContent = `Disponibilité : ${joueur.disponibilite}`;
+
+const tagTest = document.createElement("span");
+tagTest.className = "ph-tag";
+tagTest.textContent = joueur.dernierTest ? `Dernier test : ${joueur.dernierTest}` : "Dernier test : -";
 
 phTags.appendChild(tagStatut);
-phTags.appendChild(tagMinutes);
+phTags.appendChild(tagDisp);
+phTags.appendChild(tagTest);
 
 phMain.appendChild(phName);
 phMain.appendChild(phSub);
@@ -745,13 +665,51 @@ headerCard.appendChild(phMain);
 headerCard.appendChild(phScore);
 detail.appendChild(headerCard);
 
-// SECTION PROFIL PHYSIQUE (résumé + historique caché)
-renderPhysicalSection(detail, joueur);
+// SECTION PROFIL PHYSIQUE
+const physSection = document.createElement("div");
+physSection.className = "section";
+physSection.innerHTML = `
+<h3 class="section-title"><span class="icon">📏</span> Profil physique</h3>
+<div class="two-columns">
+<div class="info-card">
+<div class="info-label">Taille</div>
+<div class="info-value">${joueur.taille ?? "-"} cm</div>
+</div>
+<div class="info-card">
+<div class="info-label">Poids</div>
+<div class="info-value">${joueur.poids ?? "-"} kg</div>
+</div>
+<div class="info-card">
+<div class="info-label">% masse grasse (est.)</div>
+<div class="info-value">${joueur.masseGrasse ?? "-"} %</div>
+</div>
+</div>
+`;
+detail.appendChild(physSection);
 
-// SECTION PROFIL PERFORMANCE + antécédents
-renderProfilSection(detail, joueur);
+// SECTION PROFIL PERFORMANCE
+const profilSection = document.createElement("div");
+profilSection.className = "section";
+profilSection.innerHTML = `
+<h3 class="section-title"><span class="icon">👤</span> Profil performance & antécédents</h3>
+<div class="two-columns">
+<div class="info-card">
+<div class="info-label">Points forts</div>
+<div class="info-value">${joueur.pointsForts || "-"}</div>
+</div>
+<div class="info-card">
+<div class="info-label">Points faibles</div>
+<div class="info-value">${joueur.pointsFaibles || "-"}</div>
+</div>
+<div class="info-card">
+<div class="info-label">Antécédents globaux</div>
+<div class="info-value">${joueur.antecedents || "-"}</div>
+</div>
+</div>
+`;
+detail.appendChild(profilSection);
 
-// SECTION TESTS FONCTIONNELS GLOBAUX + F-V
+// SECTION TESTS FONCTIONNELS GLOBAUX
 renderFunctionalSection(detail, joueur);
 
 // SECTION GPS
@@ -782,315 +740,64 @@ detail.appendChild(testsSection);
 
 renderSegmentTabs(joueur);
 renderTestsSection(joueur);
-
-// activer les toggles "Voir l'historique"
-initSubToggles(detail);
-}
-
-// --- PROFIL PHYSIQUE (clic pour historique) ---
-
-function getMorphoHistory(joueur) {
-// petit historique artificiel à partir des dernières données
-const latestDate = joueur.dernierTest || "2025-11-01";
-const latest = {
-date: latestDate,
-taille: joueur.taille ?? null,
-poids: joueur.poids ?? null,
-masseGrasse: joueur.masseGrasse ?? null,
-};
-const previous = {
-date: "2025-09-01",
-taille: joueur.taille ?? null,
-poids: joueur.poids != null ? Math.max(joueur.poids - 1, 0) : null,
-masseGrasse: joueur.masseGrasse != null ? Math.max(joueur.masseGrasse + 1, 0) : null,
-};
-return [latest, previous];
-}
-
-function renderPhysicalSection(detail, joueur) {
-const section = document.createElement("div");
-section.className = "section";
-const history = getMorphoHistory(joueur);
-const current = history[0];
-const prev = history[1];
-
-const historyId = `physical-history-${joueur.id}`;
-
-section.innerHTML = `
-<h3 class="section-title">
-<span class="icon">📏</span> Profil physique
-</h3>
-<div class="section-body-summary">
-<div class="two-columns">
-<div class="info-card">
-<div class="info-label">Taille</div>
-<div class="info-value">
-${current.taille ?? "-"} cm
-</div>
-</div>
-<div class="info-card">
-<div class="info-label">Poids</div>
-<div class="info-value">
-${current.poids ?? "-"} kg
-${buildNeutralTrendIcon(current.poids, prev.poids)}
-</div>
-</div>
-<div class="info-card">
-<div class="info-label">% masse grasse (est.)</div>
-<div class="info-value">
-${current.masseGrasse ?? "-"} %
-${buildNeutralTrendIcon(current.masseGrasse, prev.masseGrasse)}
-</div>
-</div>
-</div>
-</div>
-<button type="button" class="subtoggle" data-target="${historyId}">Voir l'historique</button>
-<div id="${historyId}" class="section-body-details">
-<div class="info-card">
-<div class="info-label">Historique des mesures</div>
-<table class="table-like" style="margin-top:4px;">
-<thead>
-<tr>
-<th>Date</th>
-<th>Taille (cm)</th>
-<th>Poids (kg)</th>
-<th>% MG</th>
-</tr>
-</thead>
-<tbody>
-${history
-.map(
-(h) => `
-<tr>
-<td>${h.date}</td>
-<td>${h.taille ?? "-"}</td>
-<td>${h.poids ?? "-"}</td>
-<td>${h.masseGrasse ?? "-"}</td>
-</tr>
-`
-)
-.join("")}
-</tbody>
-</table>
-</div>
-</div>
-`;
-
-detail.appendChild(section);
-}
-
-// --- PROFIL PERFORMANCE & ANTÉCÉDENTS ---
-
-function renderProfilSection(detail, joueur) {
-const section = document.createElement("div");
-section.className = "section";
-
-const playerBlessures = blessures.filter((b) => b.joueurId === joueur.id);
-const historyId = `antecedents-history-${joueur.id}`;
-
-section.innerHTML = `
-<h3 class="section-title">
-<span class="icon">👤</span> Profil performance & antécédents
-</h3>
-<div class="section-body-summary">
-<div class="two-columns">
-<div class="info-card">
-<div class="info-label">Points forts</div>
-<div class="info-value">${joueur.pointsForts || "-"}</div>
-</div>
-<div class="info-card">
-<div class="info-label">Points faibles</div>
-<div class="info-value">${joueur.pointsFaibles || "-"}</div>
-</div>
-<div class="info-card">
-<div class="info-label">Antécédents globaux</div>
-<div class="info-value">
-${joueur.antecedents || "-"}
-</div>
-</div>
-</div>
-</div>
-<button type="button" class="subtoggle" data-target="${historyId}">Voir l'historique</button>
-<div id="${historyId}" class="section-body-details">
-${
-playerBlessures.length === 0
-? `<div class="section-content">Pas d'antécédents de blessure enregistrés.</div>`
-: `
-<div class="info-card">
-<div class="info-label">Historique des blessures</div>
-<table class="table-like" style="margin-top:4px;">
-<thead>
-<tr>
-<th>Date</th>
-<th>Diagnostic</th>
-<th>Zone</th>
-<th>Durée indisponibilité (jours)</th>
-</tr>
-</thead>
-<tbody>
-${playerBlessures
-.map((b) => {
-const start = new Date(b.dateBlessure);
-const endDateStr = b.rtpEffective || b.rtpEstimee || b.rttEstimee;
-const end = endDateStr ? new Date(endDateStr) : new Date();
-const diffDays = Math.round((end - start) / (1000 * 60 * 60 * 24));
-return `
-<tr>
-<td>${b.dateBlessure}</td>
-<td>${b.diagnostic}</td>
-<td>${b.localisation}</td>
-<td>${diffDays > 0 ? diffDays : "-"} j</td>
-</tr>
-`;
-})
-.join("")}
-</tbody>
-</table>
-</div>
-`
-}
-</div>
-`;
-
-detail.appendChild(section);
 }
 
 // --- TESTS FONCTIONNELS & PROFIL F-V ---
 
-function getFunctionalHistory(joueur) {
-const base = testsFonctionnels.find((t) => t.joueurId === joueur.id);
-if (!base) return [];
-const latest = {
-date: joueur.dernierTest || "2025-11-01",
-...base,
-};
-const previous = {
-date: "2025-09-01",
-joueurId: base.joueurId,
-dc1rm: base.dc1rm != null ? Math.max(base.dc1rm - 5, 0) : null,
-tractions: base.tractions != null ? Math.max(base.tractions - 1, 0) : null,
-imtp: base.imtp != null ? Math.max(base.imtp - 100, 0) : null,
-f1080: base.f1080 != null ? Math.max(base.f1080 - 0.2, 0) : null,
-vmax: base.vmax != null ? Math.max(base.vmax - 0.1, 0) : null,
-};
-return [latest, previous];
-}
-
 function renderFunctionalSection(detail, joueur) {
 const data = testsFonctionnels.find((t) => t.joueurId === joueur.id);
-const history = getFunctionalHistory(joueur);
-const current = history[0];
-const prev = history[1];
-
 const section = document.createElement("div");
 section.className = "section";
 
-const historyId = `functional-history-${joueur.id}`;
-
 section.innerHTML = `
-<h3 class="section-title">
-<span class="icon">🏋️‍♂️</span> Tests fonctionnels globaux & profil F-V
-</h3>
-<div class="section-body-summary">
-${
-!data
-? `<div class="section-content">Tests fonctionnels à compléter.</div>`
-: `
-<div class="functional-grid">
+<h3 class="section-title"><span class="icon">🏋️‍♂️</span> Tests fonctionnels globaux</h3>
+`;
+
+if (!data) {
+section.innerHTML += `<div class="section-content">Tests fonctionnels à compléter.</div>`;
+detail.appendChild(section);
+return;
+}
+
+const grid = document.createElement("div");
+grid.className = "functional-grid";
+grid.innerHTML = `
 <div class="info-card">
 <div class="info-label">Développé couché 1RM</div>
-<div class="info-value">
-${current.dc1rm} kg
-${buildPerfTrendIcon(current.dc1rm, prev.dc1rm, true)}
-</div>
+<div class="info-value">${data.dc1rm} kg</div>
 </div>
 <div class="info-card">
 <div class="info-label">Tractions complètes</div>
-<div class="info-value">
-${current.tractions} reps
-${buildPerfTrendIcon(current.tractions, prev.tractions, true)}
-</div>
+<div class="info-value">${data.tractions} reps</div>
 </div>
 <div class="info-card">
 <div class="info-label">IMTP</div>
-<div class="info-value">
-${current.imtp} N
-${buildPerfTrendIcon(current.imtp, prev.imtp, true)}
-</div>
+<div class="info-value">${data.imtp} N</div>
 </div>
 <div class="info-card">
 <div class="info-label">Puissance 1080 Sprint</div>
-<div class="info-value">
-${current.f1080} W/kg
-${buildPerfTrendIcon(current.f1080, prev.f1080, true)}
-</div>
+<div class="info-value">${data.f1080} W/kg</div>
 </div>
 <div class="info-card">
 <div class="info-label">Vitesse max estimée</div>
-<div class="info-value">
-${current.vmax} m/s
-${buildPerfTrendIcon(current.vmax, prev.vmax, true)}
+<div class="info-value">${data.vmax} m/s</div>
 </div>
-</div>
-</div>
-`
-}
-</div>
-${
-!data
-? ""
-: `
-<button type="button" class="subtoggle" data-target="${historyId}">Voir l'historique</button>
-<div id="${historyId}" class="section-body-details">
-<div class="two-columns">
-<div class="info-card">
-<div class="info-label">Historique perfs (1RM, tractions, IMTP, etc.)</div>
-<table class="table-like" style="margin-top:4px;">
-<thead>
-<tr>
-<th>Date</th>
-<th>DC 1RM (kg)</th>
-<th>Tractions (reps)</th>
-<th>IMTP (N)</th>
-<th>1080 (W/kg)</th>
-<th>Vmax (m/s)</th>
-</tr>
-</thead>
-<tbody>
-${history
-.map(
-(h) => `
-<tr>
-<td>${h.date}</td>
-<td>${h.dc1rm}</td>
-<td>${h.tractions}</td>
-<td>${h.imtp}</td>
-<td>${h.f1080}</td>
-<td>${h.vmax}</td>
-</tr>
-`
-)
-.join("")}
-</tbody>
-</table>
-</div>
-<div class="functional-canvas-wrapper">
-<div class="info-label">Profil force–vitesse (détail)</div>
-<canvas id="fvCanvas-${joueur.id}" width="420" height="140"></canvas>
-</div>
-</div>
-</div>
-`
-}
 `;
+section.appendChild(grid);
+
+const canvasWrapper = document.createElement("div");
+canvasWrapper.className = "functional-canvas-wrapper";
+canvasWrapper.innerHTML = `
+<div class="info-label">Profil force–vitesse (schéma simplifié)</div>
+<canvas id="fvCanvas-${joueur.id}" width="420" height="140"></canvas>
+`;
+section.appendChild(canvasWrapper);
 
 detail.appendChild(section);
 
-if (data) {
 const canvas = document.getElementById(`fvCanvas-${joueur.id}`);
 if (canvas) {
 drawFVProfile(canvas, data);
-}
 }
 }
 
@@ -1153,16 +860,10 @@ const data = gpsData.filter((g) => g.joueurId === joueur.id);
 const gpsSection = document.createElement("div");
 gpsSection.className = "section";
 
-const historyId = `gps-history-${joueur.id}`;
-
 if (data.length === 0) {
 gpsSection.innerHTML = `
-<h3 class="section-title">
-<span class="icon">📡</span> Performance GPS
-</h3>
-<div class="section-body-summary">
+<h3 class="section-title"><span class="icon">📡</span> Performance GPS</h3>
 <div class="section-content">Pas de données GPS enregistrées.</div>
-</div>
 `;
 detail.appendChild(gpsSection);
 return;
@@ -1170,7 +871,6 @@ return;
 
 const sortedByDate = [...data].sort((a, b) => (a.date > b.date ? -1 : 1));
 const jourJ = sortedByDate[0];
-const prev = sortedByDate[1] || null;
 
 const byWeek = {};
 data.forEach((d) => {
@@ -1184,41 +884,24 @@ byWeek[d.semaine].count += 1;
 const semaines = Object.keys(byWeek);
 
 gpsSection.innerHTML = `
-<h3 class="section-title">
-<span class="icon">📡</span> Performance GPS
-</h3>
-<div class="section-body-summary">
+<h3 class="section-title"><span class="icon">📡</span> Performance GPS</h3>
 <div class="gps-cards">
 <div class="info-card">
-<div class="info-label">Dernière séance (${jourJ.date})</div>
-<div class="info-value">
-${jourJ.totalDistance} m
-${
-prev
-? buildPerfTrendIcon(jourJ.totalDistance, prev.totalDistance, true)
-: ""
-}
-</div>
-<div class="info-label">
-HSR : ${jourJ.hsr} m ${
-prev ? buildPerfTrendIcon(jourJ.hsr, prev.hsr, true) : ""
-} • Sprint : ${jourJ.sprint} m ${
-prev ? buildPerfTrendIcon(jourJ.sprint, prev.sprint, true) : ""
-}
-</div>
+<div class="info-label">Jour J (${jourJ.date})</div>
+<div class="info-value">${jourJ.totalDistance} m</div>
+<div class="info-label">HSR : ${jourJ.hsr} m • Sprint : ${jourJ.sprint} m</div>
 </div>
 <div class="info-card">
 <div class="info-label">Nb semaines suivies</div>
 <div class="info-value">${semaines.length}</div>
-<div class="info-label">Historique détaillé disponible.</div>
+<div class="info-label">Charge hebdo moyenne (approx.)</div>
 </div>
 </div>
-</div>
-<button type="button" class="subtoggle" data-target="${historyId}">Voir l'historique</button>
-<div id="${historyId}" class="section-body-details">
-<div class="info-card">
-<div class="info-label">Charges hebdomadaires</div>
-<table class="table-like" style="margin-top:4px;">
+`;
+
+const table = document.createElement("table");
+table.className = "table-like";
+table.innerHTML = `
 <thead>
 <tr>
 <th>Semaine</th>
@@ -1243,15 +926,13 @@ return `<tr>
 })
 .join("")}
 </tbody>
-</table>
-</div>
-</div>
 `;
 
+gpsSection.appendChild(table);
 detail.appendChild(gpsSection);
 }
 
-// --- BLESSURES / RÉÉDUC + PROGRESSION & AGENDA INTELLIGENT ---
+// --- BLESSURES / RÉÉDUC + PROGRESSION & PLANNIF INTELLIGENTE ---
 
 function renderBlessureSection(detail, joueur) {
 const blessureSection = document.createElement("div");
@@ -1297,11 +978,6 @@ refHSR = Math.round(sumH / gpsBefore.length);
 }
 
 const blessureId = blessure.id;
-
-// construire les semaines de protocole
-const protocoleWeeks = blessure.protocole
-? Object.entries(blessure.protocole).map(([key, text]) => ({ key, text }))
-: [];
 
 blessureSection.innerHTML = `
 <h3 class="section-title"><span class="icon">🩺</span> Pathologie & rééducation</h3>
@@ -1354,20 +1030,10 @@ RTP estimée : ${blessure.rtpEstimee || "-"}
 <div class="info-value">${blessure.etapesCles || "-"}</div>
 </div>
 </div>
-<h4 style="margin-top:10px;font-size:0.85rem;">Agenda de rééducation semaine par semaine</h4>
-<div class="rehab-agenda" data-blessure-id="${blessureId}">
-<div class="rehab-agenda-header">
-<button type="button" class="rehab-week-nav" data-dir="prev" data-id="${blessureId}">‹</button>
-<div class="rehab-week-label" id="rehab-week-label-${blessureId}"></div>
-<button type="button" class="rehab-week-nav" data-dir="next" data-id="${blessureId}">›</button>
-</div>
-<div class="rehab-agenda-days" id="rehab-agenda-days-${blessureId}"></div>
-</div>
-<div class="info-card" style="margin-top:8px;">
-<div class="info-label">Séances de rééducation (agenda)</div>
+<h4 style="margin-top:10px;font-size:0.85rem;">Protocole semaine par semaine</h4>
+<div id="protocole-${blessureId}"></div>
+<h4 style="margin-top:10px;font-size:0.85rem;">Séances de rééducation</h4>
 <div id="seances-${blessureId}"></div>
-</div>
-<p class="section-content" style="margin-top:6px;font-size:0.75rem;">Utilise les flèches pour naviguer semaine par semaine et voir les séances associées.</p>
 </div>
 
 <div id="planif-${blessureId}" class="rehab-panel">
@@ -1401,13 +1067,60 @@ RTP estimée : ${blessure.rtpEstimee || "-"}
 </div>
 `;
 
-detail.appendChild(blessureSection);
+// Protocole HTML
+const protocoleContainer = blessureSection.querySelector(`#protocole-${blessureId}`);
+if (blessure.protocole && protocoleContainer) {
+let protocoleHtml = "";
+Object.entries(blessure.protocole).forEach(([k, v]) => {
+protocoleHtml += `
+<div class="protocole-week">
+<div class="protocole-week-title">${k.toUpperCase().replace("SEMAINE", "Semaine ")}</div>
+<div class="protocole-week-content">${v}</div>
+</div>
+`;
+});
+protocoleContainer.innerHTML = protocoleHtml;
+}
 
+// Séances
 const seancesBlessure = seances.filter((s) => s.blessureId === blessure.id);
+const seancesContainer = blessureSection.querySelector(`#seances-${blessureId}`);
+if (seancesContainer) {
+const table = document.createElement("table");
+table.className = "table-like";
+table.innerHTML = `
+<thead>
+<tr>
+<th>Date</th>
+<th>Type</th>
+<th>Contenu</th>
+<th>RPE</th>
+<th>Tolérance</th>
+</tr>
+</thead>
+<tbody>
+${seancesBlessure
+.map(
+(s) => `
+<tr>
+<td>${s.date}</td>
+<td>${s.type}</td>
+<td>${s.resume}</td>
+<td>${s.rpe}</td>
+<td>${s.tolerance}</td>
+</tr>
+`
+)
+.join("")}
+</tbody>
+`;
+seancesContainer.appendChild(table);
+}
+
+detail.appendChild(blessureSection);
 
 initRehabTabs(blessureId);
 initRehabPlanner(blessureId, refDistance, refHSR);
-initRehabAgenda(blessureId, blessure, protocoleWeeks, seancesBlessure);
 }
 
 function initRehabTabs(blessureId) {
@@ -1460,95 +1173,6 @@ updateNext(inc);
 });
 
 updateCurrent();
-}
-
-// agenda interactif semaine par semaine
-function initRehabAgenda(blessureId, blessure, protocoleWeeks, seancesBlessure) {
-const labelEl = document.getElementById(`rehab-week-label-${blessureId}`);
-const daysEl = document.getElementById(`rehab-agenda-days-${blessureId}`);
-const seancesContainer = document.getElementById(`seances-${blessureId}`);
-const navButtons = document.querySelectorAll(`.rehab-week-nav[data-id="${blessureId}"]`);
-
-if (!labelEl || !daysEl || !seancesContainer || protocoleWeeks.length === 0) return;
-
-let currentWeekIdx = 0;
-
-function renderWeek() {
-const weekInfo = protocoleWeeks[currentWeekIdx];
-const weekIndex = currentWeekIdx;
-const weekText = weekInfo.text;
-
-const start = new Date(blessure.dateBlessure);
-start.setDate(start.getDate() + weekIndex * 7);
-const end = new Date(start);
-end.setDate(end.getDate() + 6);
-
-const formatter = new Intl.DateTimeFormat("fr-FR");
-labelEl.textContent = `Semaine ${weekIndex + 1} (${formatter.format(start)} - ${formatter.format(end)})`;
-
-daysEl.innerHTML = `
-<div class="calendar-week">
-<div class="calendar-week-title">Objectifs principaux de la semaine</div>
-<div class="calendar-week-content">${weekText}</div>
-</div>
-`;
-
-// Séances dans l'intervalle de cette semaine
-const filteredSeances = seancesBlessure.filter((s) => {
-const d = new Date(s.date);
-return d >= start && d <= end;
-});
-
-if (filteredSeances.length === 0) {
-seancesContainer.innerHTML = `<div class="section-content" style="font-size:0.8rem;">Aucune séance enregistrée pour cette semaine.</div>`;
-} else {
-const table = document.createElement("table");
-table.className = "table-like";
-table.innerHTML = `
-<thead>
-<tr>
-<th>Date</th>
-<th>Type</th>
-<th>Contenu</th>
-<th>RPE</th>
-<th>Tolérance</th>
-</tr>
-</thead>
-<tbody>
-${filteredSeances
-.map(
-(s) => `
-<tr>
-<td>${s.date}</td>
-<td>${s.type}</td>
-<td>${s.resume}</td>
-<td>${s.rpe}</td>
-<td>${s.tolerance}</td>
-</tr>
-`
-)
-.join("")}
-</tbody>
-`;
-seancesContainer.innerHTML = "";
-seancesContainer.appendChild(table);
-}
-}
-
-navButtons.forEach((btn) => {
-btn.addEventListener("click", () => {
-const dir = btn.getAttribute("data-dir");
-if (dir === "prev") {
-currentWeekIdx = Math.max(0, currentWeekIdx - 1);
-} else if (dir === "next") {
-currentWeekIdx = Math.min(protocoleWeeks.length - 1, currentWeekIdx + 1);
-}
-renderWeek();
-});
-});
-
-// initial
-renderWeek();
 }
 
 // --- SEGMENTS + TESTS ---
@@ -1838,23 +1462,15 @@ renderPlayersList();
 const detail = document.getElementById("playerDetail");
 if (!currentPlayerId) {
 detail.classList.add("empty-state");
-detail.innerHTML =
-'<div class="empty-welcome">' +
-'<img src="Image/SFP.png" alt="Stade Français Paris" class="empty-logo">' +
-'<h2>U21 Stade Français Paris</h2>' +
-'<p>Centre de suivi – Performance &amp; Médecine</p>' +
-'</div>';
+detail.innerHTML = `
+<div class="empty-welcome">
+<img src="Image/SFP.png" alt="Stade Français Paris" class="empty-logo">
+<h2>U21 Stade Français Paris</h2>
+<p>Centre de suivi – Performance &amp; Médecine</p>
+</div>
+`;
 }
 });
-}
-
-const searchInput = document.getElementById("searchInput");
-if (searchInput) {
-searchInput.addEventListener("input", () => {
-searchTerm = searchInput.value || "";
-renderPlayersList();
-});
-}
 }
 
 document.addEventListener("DOMContentLoaded", init);
