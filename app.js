@@ -1826,8 +1826,6 @@ ctx.font = "9px system-ui";
 ctx.fillText(`Évolution ${test.type} (ratio)`, paddingX, paddingY + 10);
 }
 
-// --- INIT -- -
-
 // --- INIT ---
 
 function init() {
@@ -1840,18 +1838,15 @@ renderPlayersList();
 const detail = document.getElementById("playerDetail");
 if (!currentPlayerId) {
 detail.classList.add("empty-state");
-detail.innerHTML = `
-<div class="empty-welcome">
-<img src="Image/SFP.png" alt="Stade Français Paris" class="empty-logo">
-<h2>U21 Stade Français Paris</h2>
-<p>Centre de suivi – Performance &amp; Médecine</p>
-</div>
-`;
+detail.innerHTML =
+'<div class="empty-welcome">' +
+'<img src="Image/SFP.png" alt="Stade Français Paris" class="empty-logo">' +
+'<h2>U21 Stade Français Paris</h2>' +
+'<p>Centre de suivi – Performance &amp; Médecine</p>' +
+'</div>';
 }
 });
 }
-
-document.addEventListener("DOMContentLoaded", init);
 
 const searchInput = document.getElementById("searchInput");
 if (searchInput) {
