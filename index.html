@@ -2,79 +2,65 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Suivi Joueurs – Stade Français Paris</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<!-- Feuille de style -->
+<!-- Police moderne type Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="styles.css" />
-
-<!-- Police moderne (style Inter / SF Pro) -->
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 </head>
-
 <body>
 <div class="app">
-
-<!-- HEADER TOP -->
 <header class="app-header">
 <div class="logo-title">
 <div class="logo-circle">
+<!-- IMPORTANT : ton logo est dans le dossier "Image" -->
 <img src="Image/stade_français.png" alt="Stade Français" class="logo-img">
 </div>
 <div>
-<h1>Suivi Joueurs</h1>
-<p>Gestion effectif – Stade Français Paris</p>
+<h1>Suivi joueurs</h1>
+<p>Staff médical & performance – Stade Français Paris</p>
 </div>
 </div>
 
 <div class="header-stats">
 <div class="stat-card stat-available">
-<span class="stat-label">Disponibles</span>
-<span class="stat-value" id="countDisponible">0</span>
+<span class="stat-label">Joueurs disponibles</span>
+<span id="stat-disponibles" class="stat-value">0</span>
 </div>
 <div class="stat-card stat-injury">
-<span class="stat-label">Blessés</span>
-<span class="stat-value" id="countBlesse">0</span>
-</div>
-<div class="stat-card">
-<span class="stat-label">Adaptés</span>
-<span class="stat-value" id="countAdapte">0</span>
+<span class="stat-label">Joueurs blessés</span>
+<span id="stat-infirmerie" class="stat-value">0</span>
 </div>
 </div>
 </header>
 
-<!-- MAIN CONTENT -->
 <main class="app-main">
-
-<!-- LEFT COLUMN : PLAYERS LIST -->
-<aside class="left-panel">
-
+<!-- Colonne gauche : effectif -->
+<section class="left-panel">
 <div class="filters">
-<label for="filter">Filtrer :</label>
-<select id="filter">
-<option value="all">Tout l'effectif</option>
-<option value="disponible">Joueurs disponibles</option>
-<option value="blesse">Joueurs blessés</option>
-<option value="adapte">Joueurs adaptés</option>
+<label for="filterSelect">Filtrer :</label>
+<select id="filterSelect">
+<option value="all">Tout l’effectif</option>
+<option value="available">Joueurs disponibles</option>
+<option value="injury">Joueurs blessés</option>
 </select>
 </div>
-
-<div id="playersList" class="players-list"></div>
-
-</aside>
-
-<!-- RIGHT COLUMN : PLAYER DETAILS -->
-<section class="right-panel">
-<div id="playerDetail" class="player-detail empty-state">
-Sélectionnez un joueur dans la liste.
+<div id="playersList" class="players-list">
+<!-- Cartes joueurs injectées par app.js -->
 </div>
 </section>
 
+<!-- Colonne droite : fiche joueur -->
+<section class="right-panel">
+<div id="playerDetail" class="player-detail empty-state">
+<p>Sélectionne un joueur dans la liste pour voir le détail.</p>
+</div>
+</section>
 </main>
 </div>
 
-<!-- SCRIPT -->
 <script src="app.js"></script>
-
 </body>
 </html>
