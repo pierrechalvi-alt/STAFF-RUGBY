@@ -559,12 +559,23 @@ icon = "↓";
 return `<span class="${trendClass}">${icon}</span>`;
 }
 
-// petit helper sections cliquables
-function makeSectionCollapsible(sectionEl) {
-const title = sectionEl.querySelector(".section-title");
-if (!title) return;
-title.addEventListener("click", () => {
-sectionEl.classList.toggle("open");
+// toggle pour sous-parties d'historique
+function initSubToggles(root) {
+const scope = root || document;
+scope.querySelectorAll(".subtoggle").forEach((btn) => {
+const targetId = btn.getAttribute("data-target");
+const target = document.getElementById(targetId);
+if (!target) return;
+btn.addEventListener("click", () => {
+const isActive = target.classList.contains("active");
+if (isActive) {
+target.classList.remove("active");
+btn.textContent = "Voir l'historique";
+} else {
+target.classList.add("active");
+btn.textContent = "Masquer l'historique";
+}
+});
 });
 }
 
@@ -734,7 +745,7 @@ headerCard.appendChild(phMain);
 headerCard.appendChild(phScore);
 detail.appendChild(headerCard);
 
-// SECTION PROFIL PHYSIQUE (résumé + détail)
+// SECTION PROFIL PHYSIQUE (résumé + historique caché)
 renderPhysicalSection(detail, joueur);
 
 // SECTION PROFIL PERFORMANCE + antécédents
@@ -771,6 +782,9 @@ detail.appendChild(testsSection);
 
 renderSegmentTabs(joueur);
 renderTestsSection(joueur);
+
+// activer les toggles "Voir l'historique"
+initSubToggles(detail);
 }
 
 // --- PROFIL PHYSIQUE (clic pour historique) ---
@@ -795,15 +809,16 @@ return [latest, previous];
 
 function renderPhysicalSection(detail, joueur) {
 const section = document.createElement("div");
-section.className = "section section-collapsible";
+section.className = "section";
 const history = getMorphoHistory(joueur);
 const current = history[0];
 const prev = history[1];
 
+const historyId = `physical-history-${joueur.id}`;
+
 section.innerHTML = `
 <h3 class="section-title">
 <span class="icon">📏</span> Profil physique
-<span class="section-toggle">Résumé / Détails</span>
 </h3>
 <div class="section-body-summary">
 <div class="two-columns">
@@ -829,7 +844,8 @@ ${buildNeutralTrendIcon(current.masseGrasse, prev.masseGrasse)}
 </div>
 </div>
 </div>
-<div class="section-body-details">
+<button type="button" class="subtoggle" data-target="${historyId}">Voir l'historique</button>
+<div id="${historyId}" class="section-body-details">
 <div class="info-card">
 <div class="info-label">Historique des mesures</div>
 <table class="table-like" style="margin-top:4px;">
@@ -861,21 +877,20 @@ ${history
 `;
 
 detail.appendChild(section);
-makeSectionCollapsible(section);
 }
 
 // --- PROFIL PERFORMANCE & ANTÉCÉDENTS ---
 
 function renderProfilSection(detail, joueur) {
 const section = document.createElement("div");
-section.className = "section section-collapsible";
+section.className = "section";
 
 const playerBlessures = blessures.filter((b) => b.joueurId === joueur.id);
+const historyId = `antecedents-history-${joueur.id}`;
 
 section.innerHTML = `
 <h3 class="section-title">
 <span class="icon">👤</span> Profil performance & antécédents
-<span class="section-toggle">Résumé / Détails</span>
 </h3>
 <div class="section-body-summary">
 <div class="two-columns">
@@ -895,7 +910,8 @@ ${joueur.antecedents || "-"}
 </div>
 </div>
 </div>
-<div class="section-body-details">
+<button type="button" class="subtoggle" data-target="${historyId}">Voir l'historique</button>
+<div id="${historyId}" class="section-body-details">
 ${
 playerBlessures.length === 0
 ? `<div class="section-content">Pas d'antécédents de blessure enregistrés.</div>`
@@ -937,7 +953,6 @@ return `
 `;
 
 detail.appendChild(section);
-makeSectionCollapsible(section);
 }
 
 // --- TESTS FONCTIONNELS & PROFIL F-V ---
@@ -968,12 +983,13 @@ const current = history[0];
 const prev = history[1];
 
 const section = document.createElement("div");
-section.className = "section section-collapsible";
+section.className = "section";
+
+const historyId = `functional-history-${joueur.id}`;
 
 section.innerHTML = `
 <h3 class="section-title">
 <span class="icon">🏋️‍♂️</span> Tests fonctionnels globaux & profil F-V
-<span class="section-toggle">Résumé / Détails</span>
 </h3>
 <div class="section-body-summary">
 ${
@@ -1020,11 +1036,12 @@ ${buildPerfTrendIcon(current.vmax, prev.vmax, true)}
 `
 }
 </div>
-<div class="section-body-details">
 ${
 !data
-? `<div class="section-content">Tests fonctionnels à compléter.</div>`
+? ""
 : `
+<button type="button" class="subtoggle" data-target="${historyId}">Voir l'historique</button>
+<div id="${historyId}" class="section-body-details">
 <div class="two-columns">
 <div class="info-card">
 <div class="info-label">Historique perfs (1RM, tractions, IMTP, etc.)</div>
@@ -1062,13 +1079,12 @@ ${history
 <canvas id="fvCanvas-${joueur.id}" width="420" height="140"></canvas>
 </div>
 </div>
+</div>
 `
 }
-</div>
 `;
 
 detail.appendChild(section);
-makeSectionCollapsible(section);
 
 if (data) {
 const canvas = document.getElementById(`fvCanvas-${joueur.id}`);
@@ -1135,21 +1151,20 @@ ctx.fillText("Profil actuel", x + 6, y - 6);
 function renderGpsSection(detail, joueur) {
 const data = gpsData.filter((g) => g.joueurId === joueur.id);
 const gpsSection = document.createElement("div");
-gpsSection.className = "section section-collapsible";
+gpsSection.className = "section";
+
+const historyId = `gps-history-${joueur.id}`;
 
 if (data.length === 0) {
 gpsSection.innerHTML = `
 <h3 class="section-title">
 <span class="icon">📡</span> Performance GPS
-<span class="section-toggle">Résumé / Détails</span>
 </h3>
 <div class="section-body-summary">
 <div class="section-content">Pas de données GPS enregistrées.</div>
 </div>
-<div class="section-body-details"></div>
 `;
 detail.appendChild(gpsSection);
-makeSectionCollapsible(gpsSection);
 return;
 }
 
@@ -1171,7 +1186,6 @@ const semaines = Object.keys(byWeek);
 gpsSection.innerHTML = `
 <h3 class="section-title">
 <span class="icon">📡</span> Performance GPS
-<span class="section-toggle">Résumé / Détails</span>
 </h3>
 <div class="section-body-summary">
 <div class="gps-cards">
@@ -1196,11 +1210,12 @@ prev ? buildPerfTrendIcon(jourJ.sprint, prev.sprint, true) : ""
 <div class="info-card">
 <div class="info-label">Nb semaines suivies</div>
 <div class="info-value">${semaines.length}</div>
-<div class="info-label">Clique pour voir l'historique détaillé.</div>
+<div class="info-label">Historique détaillé disponible.</div>
 </div>
 </div>
 </div>
-<div class="section-body-details">
+<button type="button" class="subtoggle" data-target="${historyId}">Voir l'historique</button>
+<div id="${historyId}" class="section-body-details">
 <div class="info-card">
 <div class="info-label">Charges hebdomadaires</div>
 <table class="table-like" style="margin-top:4px;">
@@ -1234,10 +1249,9 @@ return `<tr>
 `;
 
 detail.appendChild(gpsSection);
-makeSectionCollapsible(gpsSection);
 }
 
-// --- BLESSURES / RÉÉDUC + PROGRESSION & PLANNIF INTELLIGENTE ---
+// --- BLESSURES / RÉÉDUC + PROGRESSION & AGENDA INTELLIGENT ---
 
 function renderBlessureSection(detail, joueur) {
 const blessureSection = document.createElement("div");
@@ -1283,6 +1297,11 @@ refHSR = Math.round(sumH / gpsBefore.length);
 }
 
 const blessureId = blessure.id;
+
+// construire les semaines de protocole
+const protocoleWeeks = blessure.protocole
+? Object.entries(blessure.protocole).map(([key, text]) => ({ key, text }))
+: [];
 
 blessureSection.innerHTML = `
 <h3 class="section-title"><span class="icon">🩺</span> Pathologie & rééducation</h3>
@@ -1335,13 +1354,20 @@ RTP estimée : ${blessure.rtpEstimee || "-"}
 <div class="info-value">${blessure.etapesCles || "-"}</div>
 </div>
 </div>
-<h4 style="margin-top:10px;font-size:0.85rem;">Protocole semaine par semaine</h4>
-<div id="protocole-${blessureId}" class="calendar-grid"></div>
-<div id="seances-wrapper-${blessureId}" style="margin-top:10px; display:none;">
-<h4 style="margin-top:4px;font-size:0.85rem;">Séances de rééducation</h4>
+<h4 style="margin-top:10px;font-size:0.85rem;">Agenda de rééducation semaine par semaine</h4>
+<div class="rehab-agenda" data-blessure-id="${blessureId}">
+<div class="rehab-agenda-header">
+<button type="button" class="rehab-week-nav" data-dir="prev" data-id="${blessureId}">‹</button>
+<div class="rehab-week-label" id="rehab-week-label-${blessureId}"></div>
+<button type="button" class="rehab-week-nav" data-dir="next" data-id="${blessureId}">›</button>
+</div>
+<div class="rehab-agenda-days" id="rehab-agenda-days-${blessureId}"></div>
+</div>
+<div class="info-card" style="margin-top:8px;">
+<div class="info-label">Séances de rééducation (agenda)</div>
 <div id="seances-${blessureId}"></div>
 </div>
-<p class="section-content" style="margin-top:6px;font-size:0.75rem;">Clique sur une semaine du calendrier pour afficher toutes les séances réalisées.</p>
+<p class="section-content" style="margin-top:6px;font-size:0.75rem;">Utilise les flèches pour naviguer semaine par semaine et voir les séances associées.</p>
 </div>
 
 <div id="planif-${blessureId}" class="rehab-panel">
@@ -1375,75 +1401,13 @@ RTP estimée : ${blessure.rtpEstimee || "-"}
 </div>
 `;
 
-// Protocole -> calendrier
-const protocoleContainer = blessureSection.querySelector(`#protocole-${blessureId}`);
-if (blessure.protocole && protocoleContainer) {
-let protocoleHtml = "";
-Object.entries(blessure.protocole).forEach(([k, v], index) => {
-const title = k.toUpperCase().replace("SEMAINE", "Semaine ");
-protocoleHtml += `
-<div class="calendar-week" data-week="${k}">
-<div class="calendar-week-title">${title}</div>
-<div class="calendar-week-content">${v}</div>
-</div>
-`;
-});
-protocoleContainer.innerHTML = protocoleHtml;
-}
-
-// Séances
-const seancesBlessure = seances.filter((s) => s.blessureId === blessure.id);
-const seancesWrapper = blessureSection.querySelector(`#seances-wrapper-${blessureId}`);
-const seancesContainer = blessureSection.querySelector(`#seances-${blessureId}`);
-if (seancesContainer) {
-const table = document.createElement("table");
-table.className = "table-like";
-table.innerHTML = `
-<thead>
-<tr>
-<th>Date</th>
-<th>Type</th>
-<th>Contenu</th>
-<th>RPE</th>
-<th>Tolérance</th>
-</tr>
-</thead>
-<tbody>
-${seancesBlessure
-.map(
-(s) => `
-<tr>
-<td>${s.date}</td>
-<td>${s.type}</td>
-<td>${s.resume}</td>
-<td>${s.rpe}</td>
-<td>${s.tolerance}</td>
-</tr>
-`
-)
-.join("")}
-</tbody>
-`;
-seancesContainer.appendChild(table);
-}
-
 detail.appendChild(blessureSection);
 
-// clic sur calendrier -> affiche les séances
-if (protocoleContainer && seancesWrapper) {
-const weeksEls = protocoleContainer.querySelectorAll(".calendar-week");
-weeksEls.forEach((w) => {
-w.addEventListener("click", () => {
-weeksEls.forEach((o) => o.classList.remove("calendar-week-active"));
-w.classList.add("calendar-week-active");
-seancesWrapper.style.display = "block";
-seancesWrapper.scrollIntoView({ behavior: "smooth", block: "start" });
-});
-});
-}
+const seancesBlessure = seances.filter((s) => s.blessureId === blessure.id);
 
 initRehabTabs(blessureId);
 initRehabPlanner(blessureId, refDistance, refHSR);
+initRehabAgenda(blessureId, blessure, protocoleWeeks, seancesBlessure);
 }
 
 function initRehabTabs(blessureId) {
@@ -1496,6 +1460,95 @@ updateNext(inc);
 });
 
 updateCurrent();
+}
+
+// agenda interactif semaine par semaine
+function initRehabAgenda(blessureId, blessure, protocoleWeeks, seancesBlessure) {
+const labelEl = document.getElementById(`rehab-week-label-${blessureId}`);
+const daysEl = document.getElementById(`rehab-agenda-days-${blessureId}`);
+const seancesContainer = document.getElementById(`seances-${blessureId}`);
+const navButtons = document.querySelectorAll(`.rehab-week-nav[data-id="${blessureId}"]`);
+
+if (!labelEl || !daysEl || !seancesContainer || protocoleWeeks.length === 0) return;
+
+let currentWeekIdx = 0;
+
+function renderWeek() {
+const weekInfo = protocoleWeeks[currentWeekIdx];
+const weekIndex = currentWeekIdx;
+const weekText = weekInfo.text;
+
+const start = new Date(blessure.dateBlessure);
+start.setDate(start.getDate() + weekIndex * 7);
+const end = new Date(start);
+end.setDate(end.getDate() + 6);
+
+const formatter = new Intl.DateTimeFormat("fr-FR");
+labelEl.textContent = `Semaine ${weekIndex + 1} (${formatter.format(start)} - ${formatter.format(end)})`;
+
+daysEl.innerHTML = `
+<div class="calendar-week">
+<div class="calendar-week-title">Objectifs principaux de la semaine</div>
+<div class="calendar-week-content">${weekText}</div>
+</div>
+`;
+
+// Séances dans l'intervalle de cette semaine
+const filteredSeances = seancesBlessure.filter((s) => {
+const d = new Date(s.date);
+return d >= start && d <= end;
+});
+
+if (filteredSeances.length === 0) {
+seancesContainer.innerHTML = `<div class="section-content" style="font-size:0.8rem;">Aucune séance enregistrée pour cette semaine.</div>`;
+} else {
+const table = document.createElement("table");
+table.className = "table-like";
+table.innerHTML = `
+<thead>
+<tr>
+<th>Date</th>
+<th>Type</th>
+<th>Contenu</th>
+<th>RPE</th>
+<th>Tolérance</th>
+</tr>
+</thead>
+<tbody>
+${filteredSeances
+.map(
+(s) => `
+<tr>
+<td>${s.date}</td>
+<td>${s.type}</td>
+<td>${s.resume}</td>
+<td>${s.rpe}</td>
+<td>${s.tolerance}</td>
+</tr>
+`
+)
+.join("")}
+</tbody>
+`;
+seancesContainer.innerHTML = "";
+seancesContainer.appendChild(table);
+}
+}
+
+navButtons.forEach((btn) => {
+btn.addEventListener("click", () => {
+const dir = btn.getAttribute("data-dir");
+if (dir === "prev") {
+currentWeekIdx = Math.max(0, currentWeekIdx - 1);
+} else if (dir === "next") {
+currentWeekIdx = Math.min(protocoleWeeks.length - 1, currentWeekIdx + 1);
+}
+renderWeek();
+});
+});
+
+// initial
+renderWeek();
 }
 
 // --- SEGMENTS + TESTS ---
