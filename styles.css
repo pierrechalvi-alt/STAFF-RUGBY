@@ -204,14 +204,31 @@ color: #cbd5f5;
 /* Badges */
 
 .badge {
-padding: 3px 9px;
+  display: inline-block;
+padding: 4px 10px;
 border-radius: 999px;
-font-size: 0.7rem;
+font-size: 0.75rem;
+font-weight: 600;
+line-height: 1;
 }
 
-.badge-disponible { background:#ecfdf3;color:#15803d; }
-.badge-blesse { background:#fff1f2;color:#e11d48; }
-.badge-adapte { background:#eff6ff;color:#1d4ed8; }
+.badge-disponible { 
+  background:#ecfdf3;
+  color:#15803d;
+  border:1px solid #bbf7d0;
+}
+
+.badge-blesse { 
+  background:#fff1f2;
+  color:#e11d48;
+  border:1px solid #fecdd3;
+}
+
+.badge-adapte { 
+  background:#eff6ff;
+  color:#1d4ed8;
+border:1px solid #bfdbfe;
+}
 
 /* ===== RIGHT PANEL ===== */
 
@@ -236,13 +253,23 @@ position: relative;
 border-radius: 26px;
 background: #020617;
 color: #fff;
-padding: 18px;
+padding: 20px;
 display: grid;
 grid-template-columns: auto 1fr auto;
 gap: 16px;
 margin-bottom: 18px;
 border: 2px solid var(--sf-blue);
 box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+overflow: hidden;
+}
+.player-header-card::before {
+content: "";
+position: absolute;
+top: 0;
+left: 0;
+right: 0; /* <— garantit le 100% exact */
+height: 5px;
+background: var(--sf-pink);
 }
 
 /* bande rose top */
