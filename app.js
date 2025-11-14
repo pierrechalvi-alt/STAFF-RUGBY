@@ -1836,10 +1836,14 @@ const select = document.getElementById("filterSelect");
 select.addEventListener("change", () => {
 renderPlayersList();
 const detail = document.getElementById("playerDetail");
-if (!currentPlayerId) {
-detail.classList.add("empty-state");
-detail.innerHTML = "<p>Sélectionne un joueur dans la liste pour voir le détail.</p>";
-}
+detail.innerHTML = `
+<div class="empty-welcome">
+<img src="Image/SFP.png" class="empty-logo" alt="Logo Stade Français">
+<h2 class="empty-title">U21 Stade Français Paris</h2>
+<p class="empty-subtitle">Centre de suivi – Performance &amp; Médecine</p>
+<p class="empty-hint">Sélectionne un joueur dans la liste pour commencer.</p>
+</div>
+`;
 });
 
 const searchInput = document.getElementById("searchInput");
