@@ -559,7 +559,11 @@ sub.textContent = `Poste ${j.poste} • ${j.ligne}`;
 
 const extra = document.createElement("div");
 extra.className = "player-extra";
-extra.textContent = `Forts : ${j.pointsForts} • Faibles : ${j.pointsFaibles}`;
+extra.innerHTML = `
+<span class="label-strong">Forts</span> ${j.pointsForts || "-"}
+<span class="separator">·</span>
+<span class="label-weak">Faibles</span> ${j.pointsFaibles || "-"}
+`;
 
 main.appendChild(name);
 main.appendChild(sub);
@@ -576,7 +580,7 @@ container.appendChild(card);
 });
 
 if (filtered.length === 0) {
-container.innerHTML = "<p style='font-size:0.85rem;color:#6b7280;'>Aucun joueur ne correspond à ce filtre.</p>";
+container.innerHTML = "<p style='font-size:0.85rem;color:#cbd5f5;'>Aucun joueur ne correspond à ce filtre.</p>";
 }
 }
 
