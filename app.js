@@ -1,4 +1,4 @@
-// --- ÉTAT GLOBAL ---
+// --- ÉTAT GLOBAL -- -
 
 let currentPlayerId = null;
 let selectedSegment = "Global";
