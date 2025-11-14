@@ -201,33 +201,39 @@ font-size: 0.8rem;
 color: #cbd5f5;
 }
 
-/* Badges */
+/* ---- BADGES (pastilles état joueur) ---- */
 
 .badge {
-  display: inline-block;
-padding: 4px 10px;
-border-radius: 999px;
-font-size: 0.75rem;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+padding: 3px 8px; /* petite taille */
+border-radius: 10px; /* arrondi propre */
+font-size: 0.70rem; /* taille réelle comme avant */
 font-weight: 600;
 line-height: 1;
+white-space: nowrap;
 }
 
-.badge-disponible { 
-  background:#ecfdf3;
-  color:#15803d;
-  border:1px solid #bbf7d0;
+/* Disponible (vert) */
+.badge-disponible {
+background: #ecfdf3;
+color: #15803d;
+border: 1px solid #bbf7d0;
 }
 
-.badge-blesse { 
-  background:#fff1f2;
-  color:#e11d48;
-  border:1px solid #fecdd3;
+/* Blessé (rose SF) */
+.badge-blesse {
+background: #fff1f2;
+color: #e11d48;
+border: 1px solid #fecdd3;
 }
 
-.badge-adapte { 
-  background:#eff6ff;
-  color:#1d4ed8;
-border:1px solid #bfdbfe;
+/* Adapté (bleu ciel) */
+.badge-adapte {
+background: #eff6ff;
+color: #1d4ed8;
+border: 1px solid #bfdbfe;
 }
 
 /* ===== RIGHT PANEL ===== */
