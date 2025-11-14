@@ -201,18 +201,39 @@ font-size: 0.8rem;
 color: #cbd5f5;
 }
 
-/* ---- BADGES (pastilles état joueur) ---- */
-
-/* BADGES — version compacte comme avant */
+/* BADGES – Version élégante et compacte (ancienne version) */
 .badge {
-padding: 2px 6px;
-font-size: 0.65rem;
-border-radius: 8px;
-font-weight: 600;
-line-height: 1;
-white-space: nowrap;
 display: inline-block;
+padding: 3px 10px; /* finesse parfaite */
+font-size: 0.72rem; /* identique à l’ancienne */
+font-weight: 600;
+border-radius: 6px; /* arrondi élégant, pas rond */
+line-height: 1.1;
+white-space: nowrap;
+border: 1px solid rgba(0,0,0,0.08);
 }
+
+/* Disponible */
+.badge-disponible {
+background: #e8f9ef;
+color: #15803d;
+border-color: #bbf7d0;
+}
+
+/* Blessé */
+.badge-blesse {
+background: #fdecef;
+color: #be123c;
+border-color: #fecdd3;
+}
+
+/* Adapté – Orange */
+.badge-adapte {
+background: #fff7ed; /* orange très clair */
+color: #c2410c; /* orange foncé lisible */
+border-color: #fed7aa; /* bordure douce */
+}
+
 /* ===== RIGHT PANEL ===== */
 
 .right-panel {
