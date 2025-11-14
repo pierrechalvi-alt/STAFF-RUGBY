@@ -454,19 +454,20 @@ font-size: 0.8rem;
 color: var(--text-muted);
 }
 
-/* sections cliquables (résumé / détails) */
+/* bouton pour afficher l'historique ciblé */
 
-.section-collapsible .section-title {
+.subtoggle {
+margin-top: 6px;
+font-size: 0.75rem;
+background: #f1f5f9;
+border-radius: 999px;
+border: 1px solid var(--border-soft);
+padding: 4px 10px;
 cursor: pointer;
 }
 
-.section-toggle {
-margin-left: auto;
-font-size: 0.75rem;
-color: var(--text-muted);
-display: flex;
-align-items: center;
-gap: 4px;
+.subtoggle:hover {
+background: #e5e7eb;
 }
 
 .section-body-summary {
@@ -478,12 +479,8 @@ margin-top: 8px;
 display: none;
 }
 
-.section-collapsible.open .section-body-details {
+.section-body-details.active {
 display: block;
-}
-
-.section-collapsible.open .section-body-summary {
-display: none;
 }
 
 /* info card */
@@ -756,31 +753,53 @@ font-size: 0.85rem;
 margin-top: 6px;
 }
 
-/* Protocole semaine par semaine -> style calendrier */
+/* Protocole semaine par semaine -> AGENDA interactif */
 
-.calendar-grid {
+.rehab-agenda {
+margin-top: 10px;
+border-radius: 12px;
+border: 1px solid var(--border-soft);
+background: #f9fafb;
+padding: 8px;
+}
+
+.rehab-agenda-header {
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin-bottom: 6px;
+}
+
+.rehab-week-label {
+font-size: 0.8rem;
+font-weight: 600;
+color: #111827;
+}
+
+.rehab-week-nav {
+border-radius: 999px;
+border: 1px solid var(--border-soft);
+background: #fff;
+font-size: 0.8rem;
+padding: 3px 8px;
+cursor: pointer;
+}
+
+.rehab-week-nav:hover {
+background: #e5e7eb;
+}
+
+.rehab-agenda-days {
 display: grid;
-grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
-gap: 8px;
-margin-top: 6px;
+grid-template-columns: 1fr;
+gap: 6px;
 }
 
 .calendar-week {
 padding: 8px;
 border-radius: 10px;
 border: 1px solid var(--border-soft);
-background: #f9fafb;
-cursor: pointer;
-position: relative;
-}
-
-.calendar-week:hover {
-border-color: var(--sf-pink);
-}
-
-.calendar-week-active {
-border-color: var(--sf-pink);
-box-shadow: 0 0 0 1px rgba(255,46,154,0.25);
+background: #ffffff;
 }
 
 .calendar-week-title {
@@ -792,12 +811,6 @@ margin-bottom: 3px;
 .calendar-week-content {
 font-size: 0.8rem;
 color: var(--text-muted);
-}
-
-/* Protocole semaine par semaine (conteneur détail éventuel) */
-
-.protocole-week-content {
-font-size: 0.8rem;
 }
 
 /* ===== FONCTIONNEL ===== */
