@@ -197,41 +197,42 @@ color: #fff;
 }
 
 .player-sub {
-font-size: 0.8rem;
-color: #cbd5f5;
+font-size: 0.75rem !important; /* plus petit */
+font-weight: 400 !important; /* normal, plus gras */
+opacity: 0.85 !important; /* légèrement atténué */
+line-height: 1.3 !important;
 }
 
-/* BADGES – Version élégante et compacte (ancienne version) */
+/* PATCH forcé pour les pastilles état joueur */
 .badge {
-display: inline-block;
-padding: 3px 10px; /* finesse parfaite */
-font-size: 0.72rem; /* identique à l’ancienne */
-font-weight: 600;
-border-radius: 6px; /* arrondi élégant, pas rond */
-line-height: 1.1;
-white-space: nowrap;
-border: 1px solid rgba(0,0,0,0.08);
+display: inline-block !important;
+padding: 2px 8px !important;
+font-size: 0.7rem !important;
+font-weight: 600 !important;
+border-radius: 8px !important; /* plus rectangle arrondi que rond */
+line-height: 1.1 !important;
+white-space: nowrap !important;
 }
 
 /* Disponible */
 .badge-disponible {
-background: #e8f9ef;
-color: #15803d;
-border-color: #bbf7d0;
+background: #e8f9ef !important;
+color: #15803d !important;
+border: 1px solid #bbf7d0 !important;
 }
 
 /* Blessé */
 .badge-blesse {
-background: #fdecef;
-color: #be123c;
-border-color: #fecdd3;
+background: #fdecef !important;
+color: #be123c !important;
+border: 1px solid #fecdd3 !important;
 }
 
-/* Adapté – Orange */
+/* Adapté – orange */
 .badge-adapte {
-background: #fff7ed; /* orange très clair */
-color: #c2410c; /* orange foncé lisible */
-border-color: #fed7aa; /* bordure douce */
+background: #fff7ed !important;
+color: #c2410c !important;
+border: 1px solid #fed7aa !important;
 }
 
 /* ===== RIGHT PANEL ===== */
