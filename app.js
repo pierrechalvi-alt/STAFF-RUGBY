@@ -1838,7 +1838,13 @@ renderPlayersList();
 const detail = document.getElementById("playerDetail");
 if (!currentPlayerId) {
 detail.classList.add("empty-state");
-detail.innerHTML = "<p>Sélectionne un joueur dans la liste pour voir le détail.</p>";
+detail.innerHTML = `
+<div class="empty-welcome">
+<img src="images/logo_sf.png" alt="Stade Français Paris" class="empty-logo">
+<h2>U21 Stade Français Paris</h2>
+<p>Centre de suivi – Performance & Médecine</p>
+</div>
+`;
 }
 });
 
