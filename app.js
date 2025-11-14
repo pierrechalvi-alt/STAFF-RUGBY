@@ -1836,13 +1836,13 @@ const select = document.getElementById("filterSelect");
 select.addEventListener("change", () => {
 renderPlayersList();
 const detail = document.getElementById("playerDetail");
-if (!currentPlayerId) {
+if if (!currentPlayerId) {
 detail.classList.add("empty-state");
 detail.innerHTML = `
 <div class="empty-welcome">
 <img src="Image/SFP.png" alt="Stade Français Paris" class="empty-logo">
 <h2>U21 Stade Français Paris</h2>
-<p>Centre de suivi – Performance & Médecine</p>
+<p>Centre de suivi – Performance &amp; Médecine</p>
 </div>
 `;
 }
