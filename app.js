@@ -1826,7 +1826,7 @@ ctx.font = "9px system-ui";
 ctx.fillText(`Évolution ${test.type} (ratio)`, paddingX, paddingY + 10);
 }
 
-// --- INIT ---
+// --- INIT -- -
 
 function init() {
 renderStats();
