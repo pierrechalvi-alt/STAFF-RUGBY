@@ -137,6 +137,19 @@ display: flex;
 gap: 10px;
 margin-bottom: 12px;
 font-size: 0.8rem;
+flex-wrap: wrap;
+}
+
+.filters-main {
+display: flex;
+align-items: center;
+gap: 6px;
+}
+
+.filters label {
+color: #e5e7eb;
+font-size: 0.75rem;
+white-space: nowrap;
 }
 
 .filters select {
@@ -146,6 +159,27 @@ background: #0b1120;
 padding: 8px;
 color: #fff;
 border: 1px solid #64748b;
+}
+
+/* barre de recherche rapide */
+#searchInput {
+flex: 1 1 140px;
+border-radius: 999px;
+border: 1px solid #64748b;
+background: #020617;
+padding: 7px 10px;
+color: #e5e7eb;
+font-size: 0.8rem;
+}
+
+#searchInput::placeholder {
+color: #6b7280;
+}
+
+#searchInput:focus {
+outline: none;
+border-color: var(--sf-pink);
+box-shadow: 0 0 0 1px rgba(255, 46, 154, 0.4);
 }
 
 .players-list {
@@ -420,6 +454,38 @@ font-size: 0.8rem;
 color: var(--text-muted);
 }
 
+/* sections cliquables (résumé / détails) */
+
+.section-collapsible .section-title {
+cursor: pointer;
+}
+
+.section-toggle {
+margin-left: auto;
+font-size: 0.75rem;
+color: var(--text-muted);
+display: flex;
+align-items: center;
+gap: 4px;
+}
+
+.section-body-summary {
+margin-top: 4px;
+}
+
+.section-body-details {
+margin-top: 8px;
+display: none;
+}
+
+.section-collapsible.open .section-body-details {
+display: block;
+}
+
+.section-collapsible.open .section-body-summary {
+display: none;
+}
+
 /* info card */
 
 .info-card {
@@ -690,21 +756,45 @@ font-size: 0.85rem;
 margin-top: 6px;
 }
 
-/* Protocole semaine par semaine */
+/* Protocole semaine par semaine -> style calendrier */
 
-.protocole-week {
+.calendar-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
+gap: 8px;
 margin-top: 6px;
+}
+
+.calendar-week {
 padding: 8px;
 border-radius: 10px;
 border: 1px solid var(--border-soft);
 background: #f9fafb;
+cursor: pointer;
+position: relative;
 }
 
-.protocole-week-title {
+.calendar-week:hover {
+border-color: var(--sf-pink);
+}
+
+.calendar-week-active {
+border-color: var(--sf-pink);
+box-shadow: 0 0 0 1px rgba(255,46,154,0.25);
+}
+
+.calendar-week-title {
 font-size: 0.8rem;
 font-weight: 600;
 margin-bottom: 3px;
 }
+
+.calendar-week-content {
+font-size: 0.8rem;
+color: var(--text-muted);
+}
+
+/* Protocole semaine par semaine (conteneur détail éventuel) */
 
 .protocole-week-content {
 font-size: 0.8rem;
@@ -783,6 +873,7 @@ text-align: left;
 align-items: flex-start;
 }
 }
+
 /* === PATCH PASTILLES ÉTAT JOUEUR (version mini) === */
 .player-card .badge {
 padding: 1px 6px; /* moins haut et moins large */
