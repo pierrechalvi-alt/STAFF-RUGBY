@@ -686,30 +686,9 @@ document.getElementById("stat-infirmerie").textContent = injuryCount;
 // --- LISTE JOUEURS ---
 
 function renderPlayersList() {
+const filter = document.getElementById("filterSelect").value;
 const container = document.getElementById("playersList");
 container.innerHTML = "";
-
-// Trier les joueurs par ordre alphabétique (prénom + nom)
-const sortedPlayers = [...joueurs].sort((a, b) =>
-(a.prenom + " " + a.nom).localeCompare(b.prenom + " " + b.nom)
-);
-
-sortedPlayers.forEach(joueur => {
-const card = document.createElement("div");
-card.className = "player-card";
-
-card.innerHTML = `
-<img src="${joueur.photoUrl}" class="player-photo">
-<div class="player-info">
-<h4>${joueur.prenom} ${joueur.nom}</h4>
-<p>${joueur.poste}</p>
-</div>
-`;
-
-card.addEventListener("click", () => renderPlayerDetail(joueur.id));
-container.appendChild(card);
-});
-}
 
 let filtered = [...joueurs];
 
