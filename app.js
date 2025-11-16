@@ -12,7 +12,7 @@ const joueurs = [
     id: "J001",
     nom: "Braxton",
     prenom: "ASI",
-    poste: "1",
+    poste: "3",
     ligne: "Pilier",
     statut: "Disponible",
     disponibilite: "Disponible",
