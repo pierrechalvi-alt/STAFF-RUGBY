@@ -396,6 +396,12 @@ font-size: 0.85rem;
 opacity: 0.85;
 }
 
+.ph-meta {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  margin-top: -4px;
+}
+
 .ph-tags {
 display: flex;
 gap: 6px;
