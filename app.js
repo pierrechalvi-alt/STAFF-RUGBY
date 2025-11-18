@@ -734,42 +734,43 @@ ligne.includes(query)
 }
 
 filtered.forEach((j) => {
-const card = document.createElement("div");
-card.className = "player-card" + (currentPlayerId === j.id ? " active" : "");
-card.addEventListener("click", () => {
-currentPlayerId = j.id;
-selectedSegment = "Global";
-selectedTestId = null;
-renderPlayersList();
-renderPlayerDetail(j.id);
+  const card = document.createElement("div");
+  card.className = "player-card" + (currentPlayerId === j.id ? " active" : "");
+  card.addEventListener("click", () => {
+    currentPlayerId = j.id;
+    selectedSegment = "Global";
+    selectedTestId = null;
+    renderPlayersList();
+    renderPlayerDetail(j.id);
+  });
+
+  const avatar = createAvatar(j, "player-avatar");
+
+  const main = document.createElement("div");
+  main.className = "player-main";
+
+  const name = document.createElement("div");
+  name.className = "player-name";
+  name.textContent = `${j.prenom} ${j.nom}`;
+
+  const sub = document.createElement("div");
+  sub.className = "player-sub";
+  sub.textContent = `Poste ${j.poste} • ${j.ligne}`;
+
+  // ⬇️ On n’ajoute plus la ligne "Forts / Faibles"
+  main.appendChild(name);
+  main.appendChild(sub);
+
+  const badge = document.createElement("span");
+  badge.className = getStatusBadgeClass(j.statut);
+  badge.textContent = j.statut;
+
+  card.appendChild(avatar);
+  card.appendChild(main);
+  card.appendChild(badge);
+  container.appendChild(card);
 });
 
-const avatar = createAvatar(j, "player-avatar");
-
-const main = document.createElement("div");
-main.className = "player-main";
-
-const name = document.createElement("div");
-name.className = "player-name";
-name.textContent = `${j.prenom} ${j.nom}`;
-
-const sub = document.createElement("div");
-sub.className = "player-sub";
-sub.textContent = `Poste ${j.poste} • ${j.ligne}`;
-
-main.appendChild(name);
-main.appendChild(sub);
-main.appendChild(extra);
-
-const badge = document.createElement("span");
-badge.className = getStatusBadgeClass(j.statut);
-badge.textContent = j.statut;
-
-card.appendChild(avatar);
-card.appendChild(main);
-card.appendChild(badge);
-container.appendChild(card);
-});
 
 if (filtered.length === 0) {
 container.innerHTML = "<p style='font-size:0.85rem;color:#cbd5f5;'>Aucun joueur ne correspond à ce filtre.</p>";
