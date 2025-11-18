@@ -757,14 +757,6 @@ const sub = document.createElement("div");
 sub.className = "player-sub";
 sub.textContent = `Poste ${j.poste} • ${j.ligne}`;
 
-const extra = document.createElement("div");
-extra.className = "player-extra";
-extra.innerHTML = `
-<span class="label-strong">Forts</span> ${j.pointsForts || "-"}
-<span class="separator">·</span>
-<span class="label-weak">Faibles</span> ${j.pointsFaibles || "-"}
-`;
-
 main.appendChild(name);
 main.appendChild(sub);
 main.appendChild(extra);
