@@ -965,3 +965,45 @@ display: flex;
 align-items: center;
 justify-content: center;
 }
+
+.empty-mini { padding: 12px; color: #cbd5e1; }
+.player-card { width:100%; border:1px solid rgba(255,255,255,.2); background:#0b1120; border-radius:14px; padding:10px; display:flex; gap:10px; align-items:center; margin-bottom:10px; cursor:pointer; text-align:left; color:#fff; }
+.player-card.active { border-color: var(--sf-pink); box-shadow: 0 8px 20px rgba(255,46,154,.25); }
+.player-avatar { width:52px; height:52px; border-radius:12px; object-fit:cover; }
+.player-topline { display:flex; justify-content:space-between; gap:8px; align-items:center; }
+.player-name { font-weight:700; color:#fff; }
+.player-index { font-weight:700; color:#fff; background:var(--sf-pink); border-radius:999px; padding:4px 9px; font-size:12px; }
+.player-meta { font-size:13px; color:#cbd5e1; margin-top:4px; }
+
+.detail-hero { display:flex; gap:14px; align-items:center; padding:14px; background:linear-gradient(120deg, rgba(0,33,71,.95), rgba(0,33,71,.8)); color:#fff; border-radius:16px; margin-bottom:14px; }
+.detail-hero p { color:#dbeafe; }
+.detail-avatar { width:74px; height:74px; border-radius:14px; object-fit:cover; border:2px solid var(--sf-pink); }
+
+.metrics-stack { display:flex; flex-direction:column; gap:12px; }
+.metric-block, .test-insight { border:1px solid #dbe2ee; border-radius:16px; background:#fff; }
+.metric-header { width:100%; border:none; background:linear-gradient(120deg, rgba(0,33,71,.06), rgba(255,46,154,.08)); cursor:pointer; display:flex; justify-content:space-between; align-items:center; padding:14px 16px; font-weight:700; color:var(--sf-blue); }
+.metric-title { font-size:1.05rem; }
+.metric-note { font-size:14px; color:#fff; background:var(--sf-blue); padding:4px 10px; border-radius:999px; }
+
+.metric-profile-stats { display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
+.metric-profile-stats span { font-size:12px; color:#fff; background:var(--sf-blue); padding:4px 8px; border-radius:999px; font-weight:700; }
+.metric-content { display:none; padding:0 14px 14px 14px; }
+.metric-block.open .metric-content { display:block; }
+.test-group h4 { margin:10px 0 8px; color:#334155; font-size:13px; text-transform:uppercase; letter-spacing:.04em; }
+.tests-row { display:flex; flex-wrap:wrap; gap:8px; }
+.test-chip { border:1px solid #cbd5e1; background:#f8fafc; color:#1e293b; border-radius:999px; padding:7px 11px; cursor:pointer; }
+.test-chip.active { background:var(--sf-pink); color:#fff; border-color:var(--sf-pink); }
+
+.test-insight { margin-top:10px; padding:12px; }
+.insight-top { display:flex; justify-content:space-between; align-items:center; }
+.trend-pill { border-radius:999px; padding:4px 10px; font-weight:700; font-size:12px; }
+.trend-up { background:#e7f8ed; color:#166534; }
+.trend-down { background:#fdebec; color:#b91c1c; }
+.insight-meta { color:#334155; margin:8px 0 10px; }
+.history-chart { width:100%; height:160px; background:#f8fafc; border-radius:12px; border:1px solid #e2e8f0; }
+.season-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-top:10px; }
+.season-cell { background:#f8fafc; border:1px solid #e2e8f0; border-radius:10px; padding:8px; text-align:center; }
+.season-cell span { display:block; font-size:12px; color:#64748b; }
+.season-cell strong { color:#0f172a; }
+
+@media (max-width: 1100px) { .season-grid { grid-template-columns:1fr 1fr; } }
