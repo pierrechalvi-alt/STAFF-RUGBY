@@ -990,10 +990,10 @@ justify-content: center;
 .metric-block, .test-insight { border:1px solid #dbe2ee; border-radius:16px; background:#fff; }
 .metric-header { width:100%; border:none; background:linear-gradient(120deg, rgba(0,33,71,.06), rgba(255,46,154,.08)); cursor:pointer; display:flex; justify-content:space-between; align-items:center; padding:14px 16px; font-weight:700; color:var(--sf-blue); }
 .metric-title { font-size:1.05rem; }
-.metric-note { font-size:14px; color:#fff; background:var(--sf-blue); padding:4px 10px; border-radius:999px; }
+.metric-note { font-size:14px; color:#fff; background:var(--sf-blue); padding:4px 10px; border-radius:999px; border:1px solid rgba(255,46,154,.7); box-shadow:0 0 0 1px rgba(255,46,154,.22) inset; }
 
 .metric-profile-stats { display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end; }
-.metric-profile-stats span { font-size:12px; color:#fff; background:var(--sf-blue); padding:4px 8px; border-radius:999px; font-weight:700; }
+.metric-profile-stats span { font-size:12px; color:#fff; background:var(--sf-blue); padding:4px 8px; border-radius:999px; font-weight:700; border:1px solid rgba(255,46,154,.7); box-shadow:0 0 0 1px rgba(255,46,154,.2) inset; }
 .metric-content { display:none; padding:0 14px 14px 14px; }
 .metric-block.open .metric-content { display:block; }
 .test-group h4 { margin:10px 0 8px; color:#334155; font-size:13px; text-transform:uppercase; letter-spacing:.04em; }
