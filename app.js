@@ -89,11 +89,6 @@ function renderTop() {
 
 function renderList() {
   const items = filteredPlayers();
-  if (state.selectedPlayerId && !items.some((j) => j.id === state.selectedPlayerId)) {
-    state.selectedPlayerId = null;
-    state.openedBlock = null;
-    state.selectedTest = null;
-  }
   playersList.innerHTML = items.length ? '' : '<div class="empty-mini">Aucun joueur trouvé.</div>';
   items.forEach((j) => {
     const el = document.createElement('button');
@@ -127,6 +122,7 @@ function renderBlock(player, key) {
   }
 
   return `<section class="metric-block ${open ? 'open' : ''}"><button class="metric-header" data-key="${key}"><span class="metric-title">${cfg.label}</span>${headerRight}</button><div class="metric-content">${testsHTML}${insight}</div></section>`;
+  return `<section class="metric-block ${open ? 'open' : ''}"><button class="metric-header" data-key="${key}"><span class="metric-title">${cfg.label}</span><span class="metric-note">${note}/10</span></button><div class="metric-content">${testsHTML}${insight}</div></section>`;
 }
 
 function renderDetail() {
@@ -152,6 +148,7 @@ function renderDetail() {
     </section>
     <div class="metrics-stack">${['profil','force','endurance','vitesse','puissance'].map((k)=>renderBlock(p,k)).join('')}</div>
   `;
+  playerDetail.innerHTML = `<section class="detail-hero"><img src="${p.photoUrl}" alt="${p.nom}" class="detail-avatar"/><div><h2>${p.nom}</h2><p>${p.ligne} · Indice global <strong>${p.scoreGlobal}</strong></p></div></section><div class="metrics-stack">${['profil','force','endurance','vitesse','puissance'].map((k)=>renderBlock(p,k)).join('')}</div>`;
 
   playerDetail.querySelectorAll('.metric-header').forEach((b) => b.addEventListener('click', () => {
     const k = b.dataset.key;
@@ -168,7 +165,7 @@ function renderDetail() {
 }
 
 filterSelect.addEventListener('change', (e) => { state.filter = e.target.value; renderTop(); renderList(); renderDetail(); });
-searchInput.addEventListener('input', () => { renderTop(); renderList(); renderDetail(); });
+searchInput.addEventListener('input', renderList);
 
 function init() {
   filterSelect.innerHTML = `<option value="all">Tout l’effectif</option><option value="Premiere ligne">Premiere ligne</option><option value="Deuxième ligne">Deuxième ligne</option><option value="Troisième ligne">Troisième ligne</option><option value="Charnière">Charnière</option><option value="Centre">Centre</option><option value="Arrière">Arrière</option>`;
