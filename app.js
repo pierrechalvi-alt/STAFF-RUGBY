@@ -104,6 +104,9 @@ function renderBlock(player, key) {
   const open = state.openedBlock === key;
   const note = noteBlock(player, key);
   const testsHTML = Object.entries(cfg.tests).map(([group, arr]) => `<div class="test-group"><h4>${group}</h4><div class="tests-row">${arr.map((t)=>`<button class="test-chip ${state.openedBlock===key&&state.selectedTest===t?'active':''}" data-key="${key}" data-test="${t}">${t}</button>`).join('')}</div></div>`).join('');
+  const headerRight = key === 'profil'
+    ? `<div class="metric-profile-stats"><span>${player.taille} cm</span><span>${player.poids} kg</span><span>${player.masseGrasse}% MG</span></div>`
+    : `<span class="metric-note">${note}/10</span>`;
 
   let insight = '';
   if (open && state.selectedTest) {
@@ -118,6 +121,7 @@ function renderBlock(player, key) {
     }
   }
 
+  return `<section class="metric-block ${open ? 'open' : ''}"><button class="metric-header" data-key="${key}"><span class="metric-title">${cfg.label}</span>${headerRight}</button><div class="metric-content">${testsHTML}${insight}</div></section>`;
   return `<section class="metric-block ${open ? 'open' : ''}"><button class="metric-header" data-key="${key}"><span class="metric-title">${cfg.label}</span><span class="metric-note">${note}/10</span></button><div class="metric-content">${testsHTML}${insight}</div></section>`;
 }
 
@@ -130,6 +134,20 @@ function renderDetail() {
   }
 
   playerDetail.className = 'player-detail';
+  playerDetail.innerHTML = `
+    <section class="player-header-card">
+      <div class="ph-avatar"><img src="${p.photoUrl}" alt="${p.nom}"/></div>
+      <div class="ph-main">
+        <div class="ph-name">${p.nom}</div>
+        <div class="ph-sub">Poste · ${p.ligne}</div>
+      </div>
+      <div class="ph-score">
+        <div class="ph-score-value">${p.scoreGlobal}</div>
+        <div class="ph-score-label">Indice global</div>
+      </div>
+    </section>
+    <div class="metrics-stack">${['profil','force','endurance','vitesse','puissance'].map((k)=>renderBlock(p,k)).join('')}</div>
+  `;
   playerDetail.innerHTML = `<section class="detail-hero"><img src="${p.photoUrl}" alt="${p.nom}" class="detail-avatar"/><div><h2>${p.nom}</h2><p>${p.ligne} · Indice global <strong>${p.scoreGlobal}</strong></p></div></section><div class="metrics-stack">${['profil','force','endurance','vitesse','puissance'].map((k)=>renderBlock(p,k)).join('')}</div>`;
 
   playerDetail.querySelectorAll('.metric-header').forEach((b) => b.addEventListener('click', () => {
