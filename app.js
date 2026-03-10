@@ -122,6 +122,7 @@ function renderBlock(player, key) {
   }
 
   return `<section class="metric-block ${open ? 'open' : ''}"><button class="metric-header" data-key="${key}"><span class="metric-title">${cfg.label}</span>${headerRight}</button><div class="metric-content">${testsHTML}${insight}</div></section>`;
+  return `<section class="metric-block ${open ? 'open' : ''}"><button class="metric-header" data-key="${key}"><span class="metric-title">${cfg.label}</span><span class="metric-note">${note}/10</span></button><div class="metric-content">${testsHTML}${insight}</div></section>`;
 }
 
 function renderDetail() {
@@ -147,6 +148,7 @@ function renderDetail() {
     </section>
     <div class="metrics-stack">${['profil','force','endurance','vitesse','puissance'].map((k)=>renderBlock(p,k)).join('')}</div>
   `;
+  playerDetail.innerHTML = `<section class="detail-hero"><img src="${p.photoUrl}" alt="${p.nom}" class="detail-avatar"/><div><h2>${p.nom}</h2><p>${p.ligne} · Indice global <strong>${p.scoreGlobal}</strong></p></div></section><div class="metrics-stack">${['profil','force','endurance','vitesse','puissance'].map((k)=>renderBlock(p,k)).join('')}</div>`;
 
   playerDetail.querySelectorAll('.metric-header').forEach((b) => b.addEventListener('click', () => {
     const k = b.dataset.key;
