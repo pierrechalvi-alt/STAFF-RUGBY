@@ -59,10 +59,6 @@ function playerBirthDate(player) {
   return `${day}/${month}/2006`;
 }
 
-function playerMinutes(player) {
-  return player.minutesJouees ?? (260 + Math.round(player.scoreGlobal * 0.7));
-}
-
 function testSeries(player, block, test) {
   const base = player.scoreGlobal / 2 + rand((player.id + block + test).length) * 10;
   return seasons.map((_, i) => Number((base + i * (rand(i + base) * 2 - 0.3)).toFixed(1)));
@@ -159,7 +155,6 @@ function renderDetail() {
 
   const numeroPoste = posteNumero[p.ligne] ?? '—';
   const birthDate = playerBirthDate(p);
-  const minutesJouees = playerMinutes(p);
 
   playerDetail.className = 'player-detail';
   playerDetail.innerHTML = `
@@ -169,10 +164,6 @@ function renderDetail() {
         <div class="ph-name">${p.nom}</div>
         <div class="ph-birth">Né le ${birthDate}</div>
         <div class="ph-sub">Poste ${numeroPoste} • ${p.ligne}</div>
-        <div class="ph-tags">
-          <span class="ph-tag">Disponible</span>
-          <span class="ph-tag">Minutes jouées : ${minutesJouees}</span>
-        </div>
       </div>
       <div class="ph-score">
         <div class="ph-score-value">${p.scoreGlobal}</div>
