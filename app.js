@@ -39,6 +39,30 @@ const playerDetail = document.getElementById('playerDetail');
 
 const rand = (seed) => { const x = Math.sin(seed) * 10000; return x - Math.floor(x); };
 
+
+const posteNumero = {
+  Pilier: 3,
+  Talonneur: 2,
+  'Deuxième ligne': 4,
+  'Troisième ligne': 6,
+  'Demi de mêlée': 9,
+  "Demi d'ouverture": 10,
+  Centre: 12,
+  Ailier: 11,
+  Arrière: 15,
+};
+
+function playerBirthDate(player) {
+  if (player.id === 'J001') return '12/03/2006';
+  const day = String(8 + Number(player.id.slice(2)) % 20).padStart(2, '0');
+  const month = String(1 + Number(player.id.slice(2)) % 12).padStart(2, '0');
+  return `${day}/${month}/2006`;
+}
+
+function playerMinutes(player) {
+  return player.minutesJouees ?? (260 + Math.round(player.scoreGlobal * 0.7));
+}
+
 function testSeries(player, block, test) {
   const base = player.scoreGlobal / 2 + rand((player.id + block + test).length) * 10;
   return seasons.map((_, i) => Number((base + i * (rand(i + base) * 2 - 0.3)).toFixed(1)));
@@ -133,13 +157,22 @@ function renderDetail() {
     return;
   }
 
+  const numeroPoste = posteNumero[p.ligne] ?? '—';
+  const birthDate = playerBirthDate(p);
+  const minutesJouees = playerMinutes(p);
+
   playerDetail.className = 'player-detail';
   playerDetail.innerHTML = `
     <section class="player-header-card">
       <div class="ph-avatar"><img src="${p.photoUrl}" alt="${p.nom}"/></div>
       <div class="ph-main">
         <div class="ph-name">${p.nom}</div>
-        <div class="ph-sub">Poste · ${p.ligne}</div>
+        <div class="ph-birth">Né le ${birthDate}</div>
+        <div class="ph-sub">Poste ${numeroPoste} • ${p.ligne}</div>
+        <div class="ph-tags">
+          <span class="ph-tag">Disponible</span>
+          <span class="ph-tag">Minutes jouées : ${minutesJouees}</span>
+        </div>
       </div>
       <div class="ph-score">
         <div class="ph-score-value">${p.scoreGlobal}</div>
@@ -148,7 +181,6 @@ function renderDetail() {
     </section>
     <div class="metrics-stack">${['profil','force','endurance','vitesse','puissance'].map((k)=>renderBlock(p,k)).join('')}</div>
   `;
-  playerDetail.innerHTML = `<section class="detail-hero"><img src="${p.photoUrl}" alt="${p.nom}" class="detail-avatar"/><div><h2>${p.nom}</h2><p>${p.ligne} · Indice global <strong>${p.scoreGlobal}</strong></p></div></section><div class="metrics-stack">${['profil','force','endurance','vitesse','puissance'].map((k)=>renderBlock(p,k)).join('')}</div>`;
 
   playerDetail.querySelectorAll('.metric-header').forEach((b) => b.addEventListener('click', () => {
     const k = b.dataset.key;
