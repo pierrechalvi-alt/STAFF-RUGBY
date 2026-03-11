@@ -30,7 +30,14 @@ const blocks = {
   puissance: { label: 'Puissance', tests: { Puissance: ['Prowler', '1080', 'Kayser'] } },
 };
 
-const state = { selectedPlayerId: null, openedBlock: null, selectedTest: null, filter: 'all' };
+const state = {
+  selectedPlayerId: null,
+  openedBlock: null,
+  selectedTest: null,
+  filter: 'all',
+  rankingMode: 'team',
+  comparePlayerId: null,
+};
 
 const filterSelect = document.getElementById('filterSelect');
 const searchInput = document.getElementById('searchInput');
@@ -82,6 +89,43 @@ function rank(player, block, test) {
   const sorted = [...vals].sort((a, b) => b - a);
   const current = testSeries(player, block, test).at(-1);
   return `${sorted.findIndex((v) => v === current) + 1}/${scoped.length}`;
+}
+
+function rankAgainstScope(player, block, test, mode) {
+  const scoped = mode === 'position'
+    ? joueurs.filter((j) => j.ligne === player.ligne)
+    : joueurs;
+  const vals = scoped.map((j) => testSeries(j, block, test).at(-1));
+  const sorted = [...vals].sort((a, b) => b - a);
+  const current = testSeries(player, block, test).at(-1);
+  return `${sorted.findIndex((v) => v === current) + 1}/${scoped.length}`;
+}
+
+function rankingInsight(player, key, test) {
+  if (state.rankingMode === 'position') {
+    return `Classement poste (${player.ligne}) : <strong>${rankAgainstScope(player, key, test, 'position')}</strong>`;
+  }
+
+  if (state.rankingMode === 'comparison') {
+    const compared = joueurs.find((j) => j.id === state.comparePlayerId) || joueurs.find((j) => j.id !== player.id);
+    if (!compared) return 'Comparaison indisponible';
+    const playerVal = testSeries(player, key, test).at(-1);
+    const comparedVal = testSeries(compared, key, test).at(-1);
+    const delta = Number((playerVal - comparedVal).toFixed(1));
+    const sign = delta >= 0 ? '+' : '';
+    return `Comparaison vs ${compared.nom} : <strong>${playerVal}</strong> (${sign}${delta})`;
+  }
+
+  return `Classement équipe : <strong>${rankAgainstScope(player, key, test, 'team')}</strong>`;
+}
+
+function rankingControls(player) {
+  const compareOptions = joueurs
+    .filter((j) => j.id !== player.id)
+    .map((j) => `<option value="${j.id}" ${state.comparePlayerId === j.id ? 'selected' : ''}>${j.nom}</option>`)
+    .join('');
+
+  return `<div class="ranking-controls"><label>Vue classement</label><select class="ranking-mode-select"><option value="team" ${state.rankingMode === 'team' ? 'selected' : ''}>Par équipe</option><option value="position" ${state.rankingMode === 'position' ? 'selected' : ''}>Par poste</option><option value="comparison" ${state.rankingMode === 'comparison' ? 'selected' : ''}>Comparer un joueur</option></select>${state.rankingMode === 'comparison' ? `<select class="ranking-compare-select">${compareOptions}</select>` : ''}</div>`;
 }
 
 function historySVG(values) {
@@ -137,7 +181,7 @@ function renderBlock(player, key) {
     } else {
       const vals = testSeries(player, key, state.selectedTest);
       const tr = trend(vals, ['10 mètre','20 mètre','50 mètre','Bronco'].includes(state.selectedTest));
-      insight = `<section class="test-insight"><div class="insight-top"><h3>${state.selectedTest}</h3><span class="trend-pill ${tr.cls}">${tr.text}</span></div><p class="insight-meta">Classement groupe : <strong>${rank(player,key,state.selectedTest)}</strong></p>${historySVG(vals)}<div class="season-grid">${seasons.map((s,i)=>`<div class="season-cell"><span>${s}</span><strong>${vals[i]}</strong></div>`).join('')}</div></section>`;
+      insight = `<section class="test-insight"><div class="insight-top"><h3>${state.selectedTest}</h3><span class="trend-pill ${tr.cls}">${tr.text}</span></div>${rankingControls(player)}<p class="insight-meta">${rankingInsight(player, key, state.selectedTest)}</p>${historySVG(vals)}<div class="season-grid">${seasons.map((s,i)=>`<div class="season-cell"><span>${s}</span><strong>${vals[i]}</strong></div>`).join('')}</div></section>`;
     }
   }
 
@@ -185,6 +229,23 @@ function renderDetail() {
     state.selectedTest = b.dataset.test;
     renderDetail();
   }));
+
+  const rankingModeSelect = playerDetail.querySelector('.ranking-mode-select');
+  if (rankingModeSelect) {
+    rankingModeSelect.addEventListener('change', (e) => {
+      state.rankingMode = e.target.value;
+      if (state.rankingMode !== 'comparison') state.comparePlayerId = null;
+      renderDetail();
+    });
+  }
+
+  const rankingCompareSelect = playerDetail.querySelector('.ranking-compare-select');
+  if (rankingCompareSelect) {
+    rankingCompareSelect.addEventListener('change', (e) => {
+      state.comparePlayerId = e.target.value;
+      renderDetail();
+    });
+  }
 }
 
 filterSelect.addEventListener('change', (e) => { state.filter = e.target.value; renderTop(); renderList(); renderDetail(); });
